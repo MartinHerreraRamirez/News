@@ -7,12 +7,7 @@
 ## Detalles
 
 ### SITIO DE NOTICIAS
-El objetivo de este ejercicio consiste en el desarrollo de un sistema web en Java utilizando
-una base de datos MySQL, JPA Repository para persistir objetos y Spring Boot como
-framework de desarrollo web.
-Creación de la Base de Datos MySQL
-Crear el esquema sobre el cual operará el sistema de noticias. Para esto, en el IDE de
-base de datos que esté utilizando (por ejemplo, Workbench) ejecute la sentencia:
+El objetivo de este ejercicio consiste en el desarrollo de un sistema web en Java utilizando una base de datos MySQL, JPA Repository para persistir objetos y Spring Boot como framework de desarrollo web. Creación de la Base de Datos MySQL. Crear el esquema sobre el cual operará el sistema de noticias. Para esto, en el IDE de base de datos que esté utilizando (por ejemplo, Workbench) ejecute la sentencia:
 
 ```sql
 CREATE DATABASE news;
@@ -55,4 +50,41 @@ Esta capa tiene la responsabilidad de llevar adelante las funcionalidades necesa
 > #### • Vista noticia: en esta vista tendremos el acceso a la noticia completa (cuerpo). Es la vista que se abre cuando hacemos click en alguna tarjeta de la vista inicio.
 >
 > #### • Vista panelAdmin: en esta vista es donde gestionaremos las noticias. Aquí encontraremos los formularios necesarios para crear, modificar o eliminar una Noticia.
+
+# Segunda Parte
+
+## Detalles
+
+El cliente nos envió nuevos requerimientos para la aplicación web que desarrollamos en la guía anterior. Es por esto que vamos a continuar trabajando sobre el mismo proyecto y usando la misma base de datos para completar nuestro EggNews.
+Además de las entidades que ya teníamos, crearemos tres nuevas entidades: Usuario, Periodista y Administrador.
+
+## Entidad Usuario
+La entidad Usuario modela los usuarios que se registran y loguean en la web. Esta entidad debe poseer los siguientes atributos:
+#### • String nombreUsuario
+#### • String password
+#### • Date fecha de alta.
+#### • Rol rol
+#### • Boolean activo
+
+> [!IMPORTANT]
+> Un Usuario debe loguearse para ver las noticias, y perderá la posibilidad de ingresar a la vista panelAdmin.
+>_Las entidades Periodista y Administrador deben extender de Usuario._
+
+## Entidad Periodista
+_La entidad Periodista tendrá como atributos extras:_
+#### • ArrayList<Noticia> misNoticias
+#### • Integer sueldoMensual.
+
+> [!IMPORTANT]
+> Un Periodista debe loguearse en el sistema para poder acceder a crear y modificar Noticias.
+> Esta acción deberá realizarse desde la vista panelAdmin.
+
+## Entidad Administrador
+_La entidad Administrador podrá:_
+
+> [!IMPORTANT]
+> #### • Podrá crear, modificar y eliminar noticias
+> #### • Dar de alta o baja a Periodistas (modificar el atributo activo).
+> #### • Indicar cuál va a ser el sueldoMensual de cada Periodista.
+> #### Un Administrador debe loguearse en el sistema para poder acceder a sus funcionalidades.
 
