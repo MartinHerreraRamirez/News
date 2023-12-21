@@ -2,7 +2,7 @@
 
 > [!NOTE]
 > * 
-> Proyecto Java utilizando Spring, Spring Boot, Spring Security, Spring Web, Spring Data JPA, Lombok,  MySQL Driver, Thymeleaf,  CSS, Bootstrap.
+> Proyecto Java 8 utilizando Spring, Spring Boot, Spring Security, Spring Web, Spring Data JPA, Lombok,  MySQL Driver, Thymeleaf,  CSS, Bootstrap.
 
 ## Detalles
 
