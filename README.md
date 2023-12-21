@@ -1,9 +1,12 @@
-# News
-Proyecto Java utilizando Spring, Spring Boot, Spring Security, Spring Web, Spring Data JPA, Lombok,  MySQL Driver, Thymeleaf,  CSS, Bootstrap.
+# Primera Parte
+
+> [!NOTE]
+> * 
+> Proyecto Java utilizando Spring, Spring Boot, Spring Security, Spring Web, Spring Data JPA, Lombok,  MySQL Driver, Thymeleaf,  CSS, Bootstrap.
 
 ## Detalles
 
-### SITIO DE NOTICIAS NEWS
+### SITIO DE NOTICIAS
 El objetivo de este ejercicio consiste en el desarrollo de un sistema web en Java utilizando
 una base de datos MySQL, JPA Repository para persistir objetos y Spring Boot como
 framework de desarrollo web.
@@ -45,11 +48,11 @@ Esta clase tiene la responsabilidad de llevar adelante las funcionalidades neces
 ## Capa de Vistas
 Esta capa tiene la responsabilidad de llevar adelante las funcionalidades necesarias para interactuar con el usuario. Las vistas para este proyecto tienen que estar desarrolladas en HTML5 y se debe utilizar la biblioteca Thymeleaf y CSS para implementar las plantillas. Además, se debe utilizar el framework de Bootstrap para los componentes.
 
-_Se deben diseñar y crear todas las vistas web necesarias para llevar a cabo las siguientes
-funcionalidades:_
-#### • Vista inicio: en esta vista deben estar las tarjetas(bootstrap) con el título de cada noticia, ordenadas de más reciente a más antigua.
-
-#### • Vista noticia: en esta vista tendremos el acceso a la noticia completa (cuerpo). Es la vista que se abre cuando hacemos click en alguna tarjeta de la vista inicio.
-
-#### • Vista panelAdmin: en esta vista es donde gestionaremos las noticias. Aquí encontraremos los formularios necesarios para crear, modificar o eliminar una Noticia.
+> [!IMPORTANT]
+> Se deben diseñar y crear todas las vistas web necesarias para llevar a cabo las siguientes funcionalidades:
+> #### • Vista inicio: en esta vista deben estar las tarjetas(bootstrap) con el título de cada noticia, ordenadas de más reciente a más antigua.
+>
+> #### • Vista noticia: en esta vista tendremos el acceso a la noticia completa (cuerpo). Es la vista que se abre cuando hacemos click en alguna tarjeta de la vista inicio.
+>
+> #### • Vista panelAdmin: en esta vista es donde gestionaremos las noticias. Aquí encontraremos los formularios necesarios para crear, modificar o eliminar una Noticia.
 
