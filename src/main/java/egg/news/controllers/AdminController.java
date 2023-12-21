@@ -8,9 +8,9 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import egg.news.models.Author;
+import egg.news.models.Journalist;
 import egg.news.models.News;
-import egg.news.services.AuthorService;
+import egg.news.services.JournalistService;
 import egg.news.services.NewsService;
 
 @Controller
@@ -21,7 +21,7 @@ public class AdminController {
     private NewsService newsService;
 
     @Autowired
-    private AuthorService authorService;
+    private JournalistService JournalistService;
 
     @GetMapping("/dashboard")
     public String dashboard(ModelMap model){
@@ -29,8 +29,8 @@ public class AdminController {
         List<News> news = newsService.findAllNews();
         model.addAttribute("news", news);
 
-        List<Author> authors = authorService.findAllAuthors();
-        model.addAttribute("authors",authors);
+        List<Journalist> Journalists = JournalistService.findAllJournalists();
+        model.addAttribute("Journalists",Journalists);
 
         return "dashboard";
     }    

@@ -24,7 +24,7 @@
                         <th scope="col">Title</th>
                         <th scope="col">Body</th>
                         <th scope="col">Date</th>
-                        <th scope="col">Author</th>                        
+                        <th scope="col">Journalist</th>                        
                     </tr>
                 </thead>
                 <tbody th:each="news : ${news}">
@@ -32,7 +32,7 @@
                         <th scope="row" th:text="${news.title}"></th>
                         <td th:text="${news.body}"></td>
                         <td th:text="${news.postDate}"></td>
-                        <td th:text="${news.author.name}"></td>
+                        <td th:text="${news.Journalist.name}"></td>
                     </tr>
                 </tbody>
             </table>
@@ -41,9 +41,9 @@
 
         <section class="h-50">
 
-            <h2 class="fw-bold text-center my-4">List of Authors</h2>
+            <h2 class="fw-bold text-center my-4">List of Journalists</h2>
 
-            <p class="text-end mx-3 mb-0"><a class="button p-2" th:href="@{/author/register}">Create Author</a></p>
+            <p class="text-end mx-3 mb-0"><a class="button p-2" th:href="@{/Journalist/register}">Create Journalist</a></p>
 
             <table class="table container mb-5 overflow-y-auto">
                 <thead class="table-info">
@@ -53,11 +53,11 @@
                         <th scope="col">State</th>                                               
                     </tr>
                 </thead>
-                <tbody th:each="author : ${authors}">
+                <tbody th:each="Journalist : ${Journalists}">
                     <tr>                        
-                        <th scope="row" th:text="${author.name}"></th>
-                        <td th:text="${author.lastname}"></td>
-                        <td th:text="${author.isPost}"></td>
+                        <th scope="row" th:text="${Journalist.name}"></th>
+                        <td th:text="${Journalist.lastname}"></td>
+                        <td th:text="${Journalist.isPost}"></td>
                     </tr>
                 </tbody>
             </table>

@@ -23,12 +23,12 @@
                 <label class="fw-bold" for="body">Body</label>
                 <input class="mb-2" type="text" name="body" id="body" th:value="${news.body}">
                 
-                <select class="mb-2 w-100" name="idAuthor">
-                    <option>Select Author</option>
+                <select class="mb-2 w-100" name="idJournalist">
+                    <option>Select Journalist</option>
                     <option 
-                    th:each="author : ${authors}"
-                    th:value="${author.id}"
-                    th:text="${author.name}"
+                    th:each="Journalist : ${Journalists}"
+                    th:value="${Journalist.id}"
+                    th:text="${Journalist.name}"
                     />
                 </select>
                 

@@ -24,7 +24,7 @@
                             <p class="card-date" th:text="${news.postDate}"></p>
                             <img th:src="@{/image/news/__${news.id}__}" class="card-img" alt="News">
                             <div class="d-flex justify-content-center">
-                                <a th:if="${session.usersession != null}" th:href="@{/news/see/__${news.id}__}" class="btn btn-primary">Ver mas</a>
+                                <a th:if="${session.usersession != null}" th:href="@{/news/see/__${news.id}__}" class="btn btn-primary">See More</a>
                             </div>
                         </div>
                       </div>

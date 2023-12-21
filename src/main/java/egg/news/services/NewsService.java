@@ -11,10 +11,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import egg.news.exceptions.MyExceptions;
-import egg.news.models.Author;
+import egg.news.models.Journalist;
 import egg.news.models.Image;
 import egg.news.models.News;
-import egg.news.repositories.IAuthorRepository;
+import egg.news.repositories.IJournalistRepository;
 import egg.news.repositories.INewsRepository;
 
 @Service
@@ -24,24 +24,24 @@ public class NewsService {
     private INewsRepository newsRepository;
 
     @Autowired
-    private IAuthorRepository authorRepository;
+    private IJournalistRepository JournalistRepository;
 
     @Autowired
     private ImageService imageService;
 
     @Transactional
-    public void createNews(String title, String body, MultipartFile file, String idAuthor) throws MyExceptions, Exception{        
+    public void createNews(String title, String body, MultipartFile file, String idJournalist) throws MyExceptions, Exception{        
 
-        validate(title, body, idAuthor);
+        validate(title, body, idJournalist);
 
         News news = new News();
-        Author author = authorRepository.findById(idAuthor).get();
+        Journalist Journalist = JournalistRepository.findById(idJournalist).get();
 
         news.setTitle(title);
         news.setBody(body);
         news.setPostDate(new Date());
         news.setIsPost(true);                
-        news.setAuthor(author);
+        news.setJournalist(Journalist);
 
         Image image = imageService.saveImage(file);
         news.setImage(image);
@@ -57,18 +57,18 @@ public class NewsService {
     }
 
     @Transactional
-    public void modifyNew(String id, String title, String body, String idAuthor ) throws MyExceptions{
+    public void modifyNew(String id, String title, String body, String idJournalist ) throws MyExceptions{
 
-        validate(title, body, idAuthor);
+        validate(title, body, idJournalist);
 
         Optional<News> responseNews = newsRepository.findById(id);
-        Optional<Author> responseAuthor = authorRepository.findById(idAuthor);
+        Optional<Journalist> responseJournalist = JournalistRepository.findById(idJournalist);
 
-        Author autor = new Author();
+        Journalist autor = new Journalist();
 
-        if(responseAuthor.isPresent()){
+        if(responseJournalist.isPresent()){
 
-            autor = responseAuthor.get();
+            autor = responseJournalist.get();
         }
 
         if(responseNews.isPresent()){
@@ -78,7 +78,7 @@ public class NewsService {
             news.setTitle(title);
             news.setBody(body);
             news.setPostDate(new Date());
-            news.setAuthor(autor);
+            news.setJournalist(autor);
 
             newsRepository.save(news);
         }
@@ -101,7 +101,7 @@ public class NewsService {
         return null;        
     }
     
-    private void validate(String title, String body, String idAuthor) throws MyExceptions{
+    private void validate(String title, String body, String idJournalist) throws MyExceptions{
 
         if(title.isEmpty()){
             throw new MyExceptions("The title is empty");
@@ -111,8 +111,8 @@ public class NewsService {
             throw new MyExceptions("The body is empty");
         }
 
-        if(idAuthor.isEmpty() || idAuthor == null){
-            throw new MyExceptions("The author is empty");
+        if(idJournalist.isEmpty() || idJournalist == null){
+            throw new MyExceptions("The Journalist is empty");
         }
     }
 }

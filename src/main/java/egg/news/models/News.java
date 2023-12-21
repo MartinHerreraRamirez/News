@@ -33,7 +33,7 @@ public class News {
     private Boolean isPost;
 
     @ManyToOne
-    private Author author;    
+    private Journalist Journalist;    
 
     @OneToOne
     private Image image;

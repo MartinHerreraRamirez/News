@@ -3,10 +3,10 @@ package egg.news.repositories;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import egg.news.models.Author;
+import egg.news.models.Journalist;
 
 @Repository
-public interface IAuthorRepository extends JpaRepository<Author, String>{ 
+public interface IJournalistRepository extends JpaRepository<Journalist, String>{ 
 
 
     

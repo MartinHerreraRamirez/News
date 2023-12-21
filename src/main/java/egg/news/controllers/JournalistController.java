@@ -12,56 +12,56 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import egg.news.exceptions.MyExceptions;
-import egg.news.models.Author;
-import egg.news.services.AuthorService;
+import egg.news.models.Journalist;
+import egg.news.services.JournalistService;
 
 @Controller
-@RequestMapping("/author")
-public class AuthorController {
+@RequestMapping("/Journalist")
+public class JournalistController {
 
     @Autowired
-    private AuthorService authorService;
+    private JournalistService JournalistService;
 
     @GetMapping("/register")
-    public String registerAuthor(){
-        return "author-register";
+    public String registerJournalist(){
+        return "Journalist-register";
     }
 
 
     @PostMapping("/registration")
-    public String registrationAuthor(
+    public String registrationJournalist(
     @RequestParam String name, 
     @RequestParam String lastname,
     ModelMap model){       
 
         try {
-            authorService.createAuthor(name, lastname);
-            model.put("success", "The author has been created successfully.");            
+            JournalistService.createJournalist(name, lastname);
+            model.put("success", "The Journalist has been created successfully.");            
             
         } catch (MyExceptions e) {
             model.put("error", e.getMessage());
-            return "author-register";
+            return "Journalist-register";
         }
 
-        return "author-register";       
+        return "Journalist-register";       
     } 
 
     
     @GetMapping("/list")
     public String list(ModelMap model){
-        List<Author> authors = authorService.findAllAuthors();
-        model.addAttribute("authors", authors);
+        List<Journalist> Journalists = JournalistService.findAllJournalists();
+        model.addAttribute("Journalists", Journalists);
 
-        return "author-list";
+        return "Journalist-list";
     }
 
 
     @GetMapping("/modify/{id}")
     public String modify(@PathVariable String id, ModelMap model){
 
-        model.put("author", authorService.getAuthor(id));
+        model.put("Journalist", JournalistService.getJournalistById(id));
 
-        return "author-modify";
+        return "Journalist-modify";
     }
 
 
@@ -73,27 +73,27 @@ public class AuthorController {
     ModelMap model){
 
         try{
-            authorService.modifyAuthor(id, name, lastname);
-            model.put("success", "The author has been modified successfully.");
+            JournalistService.modifyJournalist(id, name, lastname);
+            model.put("success", "The Journalist has been modified successfully.");
     
-            return "redirect:/author/list";
+            return "redirect:/Journalist/list";
         }catch(MyExceptions e){
 
             model.put("error",e.getMessage());
-            return "author-modify";
+            return "Journalist-modify";
         }
     }
     
 
     @GetMapping("/delete")
-    public String deleteAuthor(Author author, ModelMap model){
+    public String deleteJournalist(Journalist Journalist, ModelMap model){
         
         try {
-            authorService.deleteAuthor(author.getId());
-            return "redirect:/author/list";
+            JournalistService.deleteJournalist(Journalist.getId());
+            return "redirect:/Journalist/list";
             
         } catch (Exception e) {
-            return "author-list";
+            return "Journalist-list";
         }
     }    
 }

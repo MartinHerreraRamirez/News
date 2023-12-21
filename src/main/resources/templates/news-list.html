@@ -24,8 +24,8 @@
                     <th scope="col">Id</th>
                     <th scope="col">Title</th>
                     <th scope="col">Date</th>
-                    <th scope="col">Author</th>
-                    <th scope="col" sec:authorize="hasRole('ADMIN')">actions</th>
+                    <th scope="col">Journalist</th>
+                    <th scope="col" sec:Journalistize="hasRole('ADMIN')">actions</th>
                 </tr>
             </thead>
             <tbody th:each="news : ${news}">
@@ -33,8 +33,8 @@
                     <th scope="row" th:text="${news.id}"></th>
                     <td th:text="${news.title}"></td>
                     <td th:text="${news.postDate}"></td>
-                    <td th:text="${news.author.name}"></td>
-                    <td sec:authorize="hasRole('ADMIN')">
+                    <td th:text="${news.Journalist.name}"></td>
+                    <td sec:Journalistize="hasRole('ADMIN')">
                         <a th:href="@{/news/modify/__${news.id}__}">Edit</a>
                         <a th:href="@{/news/delete(id=${news.id})}">Delete</a>
                     </td>

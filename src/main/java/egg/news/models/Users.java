@@ -1,11 +1,15 @@
 package egg.news.models;
 
+import java.util.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import org.hibernate.annotations.GenericGenerator;
 
@@ -26,6 +30,10 @@ public class Users {
     private String email;
     private String password;
     private String phone;
+    private Boolean isActive;
+
+    @Temporal(TemporalType.DATE)
+    private Date highDate;
 
     @OneToOne
     private Image image;

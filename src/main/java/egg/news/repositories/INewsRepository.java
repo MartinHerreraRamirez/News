@@ -15,6 +15,6 @@ public interface INewsRepository extends JpaRepository<News, String>{
     @Query("SELECT n FROM News n WHERE n.title = :title")
     public News findByTitle(@Param("title") String title);
 
-    @Query("SELECT n FROM News n WHERE n.author.name = :name")
-    public List<News> findByAuthor(@Param("name") String name);    
+    @Query("SELECT n FROM News n WHERE n.Journalist.name = :name")
+    public List<News> findByJournalist(@Param("name") String name);    
 } 

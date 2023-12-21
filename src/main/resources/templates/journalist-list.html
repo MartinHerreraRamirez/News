@@ -12,7 +12,7 @@
    
     <div class="content">
         
-        <h2 class="text-center my-4 fw-bold">List of Authors</h2>      
+        <h2 class="text-center my-4 fw-bold">List of Journalists</h2>      
         
         <table class="table overflow-y-auto">
             <thead class="table-info">
@@ -20,17 +20,17 @@
                     <th scope="col">Id</th>
                     <th scope="col">Name</th>
                     <th scope="col">Lastname</th>
-                    <th scope="col" sec:authorize="hasRole('ADMIN')">actions</th>
+                    <th scope="col" sec:Journalistize="hasRole('ADMIN')">actions</th>
                 </tr>
             </thead>
-            <tbody th:each="author : ${authors}">
-                <tr th:if="${author.isPost} == true">
-                    <th scope="row" th:text="${author.id}"></th>
-                    <td th:text="${author.name}"></td>
-                    <td th:text="${author.lastname}"></td>
-                    <td sec:authorize="hasRole('ADMIN')">
-                        <a sec:authorize="hasRole('ADMIN')" th:href="@{/author/modify/__${author.id}__}">Edit</a>
-                        <a sec:authorize="hasRole('ADMIN')" th:href="@{/author/delete(id=${author.id})}">Delete</a>
+            <tbody th:each="Journalist : ${Journalists}">
+                <tr th:if="${Journalist.isPost} == true">
+                    <th scope="row" th:text="${Journalist.id}"></th>
+                    <td th:text="${Journalist.name}"></td>
+                    <td th:text="${Journalist.lastname}"></td>
+                    <td sec:Journalistize="hasRole('ADMIN')">
+                        <a sec:Journalistize="hasRole('ADMIN')" th:href="@{/Journalist/modify/__${Journalist.id}__}">Edit</a>
+                        <a sec:Journalistize="hasRole('ADMIN')" th:href="@{/Journalist/delete(id=${Journalist.id})}">Delete</a>
                     </td>
                 </tr>
             </tbody>

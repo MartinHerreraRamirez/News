@@ -22,7 +22,10 @@ public class UsersController {
     private UsersService usersService;
 
     @GetMapping("/register")
-    public String register(){
+    public String register(ModelMap model){               
+        
+        model.addAttribute("rols", usersService.deleteAdminRol());
+
         return "users-register";
     }
 
@@ -34,11 +37,12 @@ public class UsersController {
     @RequestParam String phone,
     @RequestParam String password,
     @RequestParam String password2,
+    @RequestParam String idRol,
     @RequestParam MultipartFile file,
     ModelMap model){
 
         try {
-            usersService.createUser(name, lastName, email, phone, password, password2, file);
+            usersService.createUser(name, lastName, email, phone, password, password2, idRol, file);
             model.put("success", "The user has been created successfully");
             
             return "redirect:/login";

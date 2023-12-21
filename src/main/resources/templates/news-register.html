@@ -36,12 +36,12 @@
                     <input hidden type="file" name="file" id="file">
                 </div>
 
-                <select class="mb-3 w-100 ms-1" name="idAuthor">
-                    <option>Select Author</option>
+                <select class="mb-3 w-100 ms-1" name="idJournalist">
+                    <option>Select Journalist</option>
                     <option 
-                    th:each="author : ${authors}"
-                    th:value="${author.id}"
-                    th:text="${author.name}"
+                    th:each="Journalist : ${Journalists}"
+                    th:value="${Journalist.id}"
+                    th:text="${Journalist.name}"
                     />
                 </select>
                 

@@ -12,9 +12,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
-import egg.news.models.Author;
+import egg.news.models.Journalist;
 import egg.news.models.News;
-import egg.news.services.AuthorService;
+import egg.news.services.JournalistService;
 import egg.news.services.NewsService;
 
 @Controller
@@ -22,7 +22,7 @@ import egg.news.services.NewsService;
 public class NewsController {
 
     @Autowired
-    private AuthorService authorService;
+    private JournalistService JournalistService;
 
     @Autowired
     private NewsService newsService;
@@ -30,8 +30,9 @@ public class NewsController {
     @GetMapping("/register")
     public String registerNews(ModelMap model){
 
-        List<Author> authors = authorService.findAllAuthors();
-        model.addAttribute("authors", authors);
+        List<Journalist> journalists = JournalistService.findAllJournalists();
+        
+        model.addAttribute("journalists", journalists);
 
         return "news-register";
     } 
@@ -41,18 +42,18 @@ public class NewsController {
     @RequestParam String title, 
     @RequestParam String body, 
     @RequestParam MultipartFile file,
-    @RequestParam String idAuthor,
+    @RequestParam String idJournalist,
     ModelMap model){
 
         try {            
-            newsService.createNews(title, body, file, idAuthor);
+            newsService.createNews(title, body, file, idJournalist);
             model.put("success", "The news has been created successfully");
             return "news-register";  
             
         } catch (Exception e) {
 
-            List<Author> authors = authorService.findAllAuthors();
-            model.addAttribute("authors", authors);
+            List<Journalist> Journalists = JournalistService.findAllJournalists();
+            model.addAttribute("Journalists", Journalists);
             model.put("error", e.getMessage());
 
             return "news-register";    
@@ -81,10 +82,10 @@ public class NewsController {
     public String modifyNew(@PathVariable String id, ModelMap model){
 
         News news = newsService.findNewsById(id);
-        List<Author> authorList = authorService.findAllAuthors();
+        List<Journalist> JournalistList = JournalistService.findAllJournalists();
         
         model.put("news", news);
-        model.addAttribute("authors",authorList);
+        model.addAttribute("Journalists",JournalistList);
 
         return "modify-news";
     }
@@ -94,11 +95,11 @@ public class NewsController {
     @PathVariable String id,
     @RequestParam String title,
     @RequestParam String body,
-    @RequestParam String idAuthor,
+    @RequestParam String idJournalist,
     ModelMap model){
 
         try {
-            newsService.modifyNew(id, title, body, idAuthor);
+            newsService.modifyNew(id, title, body, idJournalist);
             model.put("success", "news modified successfully");
 
             return "redirect:/news/list";

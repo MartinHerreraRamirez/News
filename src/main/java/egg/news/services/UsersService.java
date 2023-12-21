@@ -1,6 +1,8 @@
 package egg.news.services;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -35,6 +37,12 @@ public class UsersService implements UserDetailsService{
     @Autowired
     private ImageService imageService;
 
+    public ArrayList<Rol> deleteAdminRol(){
+        ArrayList<Rol> rols = new ArrayList<>(Arrays.asList(Rol.values()));
+        rols.remove(0); 
+        return rols;
+    }
+
     @Transactional
     public void createUser(
     String name,
@@ -43,6 +51,7 @@ public class UsersService implements UserDetailsService{
     String phone,
     String password,
     String password2,
+    String idRol,
     MultipartFile file) throws MyExceptions, Exception{
 
         validate(name, lastName, email, phone, password, password2);
@@ -54,7 +63,15 @@ public class UsersService implements UserDetailsService{
         user.setEmail(email);
         user.setPhone(phone);
         user.setPassword(new BCryptPasswordEncoder().encode(password));
-        user.setRol(Rol.USER);
+
+        if(idRol.equals("USER")){
+            user.setRol(Rol.USER);
+        } else {
+            user.setRol(Rol.JOURNALIST);
+        }
+
+        user.setHighDate(new Date());
+        user.setIsActive(true);
 
         Image image = imageService.saveImage(file);
 
@@ -106,7 +123,7 @@ public class UsersService implements UserDetailsService{
 
         Optional<Users> responseUser = usersRepository.findById(id);
 
-        Users users = new Users();
+        Users users = null;
 
         if(responseUser.isPresent()){
             return users = responseUser.get();
