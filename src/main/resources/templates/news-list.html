@@ -21,7 +21,6 @@
         <table class="table">
             <thead class="table-info">
                 <tr>
-                    <th scope="col">Id</th>
                     <th scope="col">Title</th>
                     <th scope="col">Date</th>
                     <th scope="col">Journalist</th>
@@ -30,7 +29,6 @@
             </thead>
             <tbody th:each="news : ${news}">
                 <tr>
-                    <th scope="row" th:text="${news.id}"></th>
                     <td th:text="${news.title}"></td>
                     <td th:text="${news.postDate}"></td>
                     <td th:text="${news.Journalist.name}"></td>

@@ -16,41 +16,16 @@ import egg.news.models.Journalist;
 import egg.news.services.JournalistService;
 
 @Controller
-@RequestMapping("/Journalist")
+@RequestMapping("/journalist")
 public class JournalistController {
 
     @Autowired
     private JournalistService JournalistService;
-
-    @GetMapping("/register")
-    public String registerJournalist(){
-        return "Journalist-register";
-    }
-
-
-    @PostMapping("/registration")
-    public String registrationJournalist(
-    @RequestParam String name, 
-    @RequestParam String lastname,
-    ModelMap model){       
-
-        try {
-            JournalistService.createJournalist(name, lastname);
-            model.put("success", "The Journalist has been created successfully.");            
-            
-        } catch (MyExceptions e) {
-            model.put("error", e.getMessage());
-            return "Journalist-register";
-        }
-
-        return "Journalist-register";       
-    } 
-
     
     @GetMapping("/list")
     public String list(ModelMap model){
-        List<Journalist> Journalists = JournalistService.findAllJournalists();
-        model.addAttribute("Journalists", Journalists);
+        List<Journalist> journalists = JournalistService.findAllJournalists();
+        model.addAttribute("journalists", journalists);
 
         return "Journalist-list";
     }
@@ -61,7 +36,7 @@ public class JournalistController {
 
         model.put("Journalist", JournalistService.getJournalistById(id));
 
-        return "Journalist-modify";
+        return "journalist-modify";
     }
 
 
@@ -76,21 +51,21 @@ public class JournalistController {
             JournalistService.modifyJournalist(id, name, lastname);
             model.put("success", "The Journalist has been modified successfully.");
     
-            return "redirect:/Journalist/list";
+            return "redirect:/journalist/list";
         }catch(MyExceptions e){
 
             model.put("error",e.getMessage());
-            return "Journalist-modify";
+            return "journalist-modify";
         }
     }
     
 
     @GetMapping("/delete")
-    public String deleteJournalist(Journalist Journalist, ModelMap model){
+    public String deleteJournalist(Journalist journalist, ModelMap model){
         
         try {
-            JournalistService.deleteJournalist(Journalist.getId());
-            return "redirect:/Journalist/list";
+            JournalistService.deleteJournalist(journalist.getId());
+            return "redirect:/journalist/list";
             
         } catch (Exception e) {
             return "Journalist-list";

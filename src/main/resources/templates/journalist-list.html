@@ -20,17 +20,17 @@
                     <th scope="col">Id</th>
                     <th scope="col">Name</th>
                     <th scope="col">Lastname</th>
-                    <th scope="col" sec:Journalistize="hasRole('ADMIN')">actions</th>
+                    <th scope="col" sec:authorize="hasRole('ADMIN')">actions</th>
                 </tr>
             </thead>
-            <tbody th:each="Journalist : ${Journalists}">
-                <tr th:if="${Journalist.isPost} == true">
-                    <th scope="row" th:text="${Journalist.id}"></th>
-                    <td th:text="${Journalist.name}"></td>
-                    <td th:text="${Journalist.lastname}"></td>
-                    <td sec:Journalistize="hasRole('ADMIN')">
-                        <a sec:Journalistize="hasRole('ADMIN')" th:href="@{/Journalist/modify/__${Journalist.id}__}">Edit</a>
-                        <a sec:Journalistize="hasRole('ADMIN')" th:href="@{/Journalist/delete(id=${Journalist.id})}">Delete</a>
+            <tbody th:each="journalist : ${journalists}">
+                <tr th:if="${journalist.isPost} == true">
+                    <th scope="row" th:text="${journalist.id}"></th>
+                    <td th:text="${journalist.name}"></td>
+                    <td th:text="${journalist.lastname}"></td>
+                    <td sec:journalistize="hasRole('ADMIN')">
+                        <a sec:authorize="hasRole('ADMIN')" th:href="@{/journalist/modify/__${journalist.id}__}">Edit</a>
+                        <a sec:authorize="hasRole('ADMIN')" th:href="@{/journalist/delete(id=${journalist.id})}">Delete</a>
                     </td>
                 </tr>
             </tbody>
