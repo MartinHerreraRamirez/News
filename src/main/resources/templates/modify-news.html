@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html 
+    xmlns:th="http://www.thymeleaf.org"
+    xmlns:sec="http://wwww.thymeleaf.org/extras/spring-security"
+    lang="en"
+>
+<head th:replace="/fragments/head :: head"></head>
+<body>
+
+    <header th:replace="/fragments/header :: header"></header>
+
+    <main class="content">
+
+        <form class="form" th:action="@{/news/modify/__${news.id}__}" method="post">
+
+            <div class="container">
+
+                <input hidden th:value="${id}" name="id">
+                
+                <label class="fw-bold" for="title">Title</label>
+                <input class="mb-2" type="text" name="title" id="title" th:value="${news.title}">
+                
+                <label class="fw-bold" for="body">Body</label>
+                <input class="mb-2" type="text" name="body" id="body" th:value="${news.body}">
+                
+                <select class="mb-2 w-100" name="idAuthor">
+                    <option>Select Author</option>
+                    <option 
+                    th:each="author : ${authors}"
+                    th:value="${author.id}"
+                    th:text="${author.name}"
+                    />
+                </select>
+                
+                <input class="button" type="submit" value="Modify">
+            </div>
+
+        </form>
+
+    </main>
+
+    <footer th:replace="/fragments/footer :: footer"></footer>
+    
+</body>
+</html>

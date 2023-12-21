@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html 
+    xmlns:th="http://www.thymeleaf.org"
+    xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+    lang="en"
+>
+    <head th:replace="/fragments/head :: head"></head>
+
+<body>
+    
+    <header th:replace="/fragments/header :: header"></header>
+
+    <main class="content">
+
+        <section>
+            
+            <h2 class="fw-bold text-center my-4">List of News</h2>
+
+            <p class="text-end mx-3 mb-0"><a class="button p-2" th:href="@{/news/register}">Create news</a></p>
+    
+            <table class="table container mb-5 overflow-y-auto">
+                <thead class="table-info">
+                    <tr>
+                        <th scope="col">Title</th>
+                        <th scope="col">Body</th>
+                        <th scope="col">Date</th>
+                        <th scope="col">Author</th>                        
+                    </tr>
+                </thead>
+                <tbody th:each="news : ${news}">
+                    <tr>                        
+                        <th scope="row" th:text="${news.title}"></th>
+                        <td th:text="${news.body}"></td>
+                        <td th:text="${news.postDate}"></td>
+                        <td th:text="${news.author.name}"></td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </section>
+
+        <section class="h-50">
+
+            <h2 class="fw-bold text-center my-4">List of Authors</h2>
+
+            <p class="text-end mx-3 mb-0"><a class="button p-2" th:href="@{/author/register}">Create Author</a></p>
+
+            <table class="table container mb-5 overflow-y-auto">
+                <thead class="table-info">
+                    <tr>
+                        <th scope="col">Name</th>
+                        <th scope="col">Last Name</th>
+                        <th scope="col">State</th>                                               
+                    </tr>
+                </thead>
+                <tbody th:each="author : ${authors}">
+                    <tr>                        
+                        <th scope="row" th:text="${author.name}"></th>
+                        <td th:text="${author.lastname}"></td>
+                        <td th:text="${author.isPost}"></td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </section>      
+
+    </main>
+    
+    <footer th:replace="/fragments/footer :: footer"></footer>
+
+</body>
+</html>

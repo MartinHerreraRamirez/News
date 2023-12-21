@@ -1,0 +1,75 @@
+<header scope="header">
+  <div class="container-logo">
+      <a th:href="@{/}"><img class="image-logo" th:src="@{/../image/logo.png}" alt="logo news"></a>
+  </div>
+  <div class="d-flex flex-row justify-content-end">        
+      <nav scope="navbar" role="navigation"> 
+        
+        <ul>
+
+          <li th:if="${session.usersession != null}" class="nav-item dropdown link">
+            <a class="nav-link dropdown-toggle active" 
+               role="button" 
+               data-bs-toggle="dropdown" 
+               aria-expanded="false" 
+               href="#"
+               >News
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item link" th:href="@{/news/register}">News Register</a></li>
+              <li><a class="dropdown-item link" th:href="@{/news/list}">News List</a></li>
+            </ul>
+          </li>
+
+          <li th:if="${session.usersession != null}" class="nav-item dropdown link">
+            <a class="nav-link dropdown-toggle active" 
+               role="button" 
+               data-bs-toggle="dropdown" 
+               aria-expanded="false" 
+               href="#"
+               >Author
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item link" th:href="@{/author/register}">Author Register</a></li>
+              <li><a class="dropdown-item link" th:href="@{/author/list}">Authors List</a></li>
+            </ul>
+          </li>
+
+          <li th:if="${session.usersession != null}" class="nav-item dropdown link py-0">
+            <a class="nav-link dropdown-toggle active" 
+               role="button" 
+               data-bs-toggle="dropdown" 
+               aria-expanded="false" 
+               href="#"
+               >
+               <span th:text="${session.usersession.name}"></span>
+               <img class="image-profile" th:src="@{/image/profile/__${session.usersession.id}__}" alt="image user">
+            </a>
+            <ul class="dropdown-menu">
+              <li th:if="${session.usersession.getRol().toString() == 'ADMIN'}"><a class="dropdown-item link" th:href="@{/admin/dashboard}">Dashboard</a></li>
+              <li th:if="${session.usersession.getRol().toString() == 'USER'}"><a class="dropdown-item link" th:href="@{/}">Start</a></li>
+              <li><a class="dropdown-item link" th:href="@{/logout}">Logout</a></li>
+            </ul>
+          </li>
+
+          <li th:if="${session.usersession == null}">
+            <a class="link" th:href="@{/}">Start</a>
+          </li>
+
+          <li th:if="${session.usersession == null}" >
+            <a class="link" th:href="@{/user/register}">Register</a>
+          </li>
+          
+          <li th:if="${session.usersession == null}" >
+            <a class="link" th:href="@{/login}">Login</a>
+          </li>
+
+        </ul>
+
+
+
+        
+      </nav>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script></header>

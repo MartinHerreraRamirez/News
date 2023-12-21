@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html 
+    xmlns:th="http://www.thymeleaf.org"
+    xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+    lang="en"
+>
+<head th:replace="/fragments/head :: head"></head>
+
+<body>
+    
+    <header th:replace="/fragments/header :: header"></header>
+
+    <main class="main">
+        
+        <div th:if="${error} != null">
+            <p class="error" th:text="${error}"></p>
+        </div>
+
+        <div th:if="${success} != null">
+            <p class="success" th:text="${success}"></p>
+        </div>
+        
+        <form class="form-news" th:action="@{/news/registration}" method="POST" enctype="multipart/form-data">
+
+            <div class="container mt-0">
+            
+                <label class="fw-bold" for="title">Title</label>
+                <input class="mb-2" type="text" name="title" id="title">
+            
+                <label class="fw-bold" for="body">Body</label>
+                <textarea class="mb-2 w-100 h-25" name="body" id="body" onfocus="this.setSelectionRange(0, 0)" onclick="this.setSelectionRange(0, 0)">
+                </textarea>       
+                
+                <div class="d-flex justify-content-center ">
+                    <label class="w-50 fw-bold border border-black mb-3 text-center" for="file">Upload File</label>
+                    <input hidden type="file" name="file" id="file">
+                </div>
+
+                <select class="mb-3 w-100 ms-1" name="idAuthor">
+                    <option>Select Author</option>
+                    <option 
+                    th:each="author : ${authors}"
+                    th:value="${author.id}"
+                    th:text="${author.name}"
+                    />
+                </select>
+                
+                <input class="button" type="submit" value="Register">
+            </div>
+
+        </form>
+        
+    </main>
+    <footer th:replace="/fragments/footer :: footer"></footer>
+
+</body>
+</html>

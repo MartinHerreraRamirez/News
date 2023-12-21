@@ -1,0 +1,15 @@
+footer{   
+    height: 3.5rem;
+    width: 100%;
+    position: relative;    
+    bottom: 0;
+    background-color: #186081;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    text-transform: uppercase;  
+    align-items: center;
+}
+
+
+
