@@ -7,7 +7,7 @@
         
         <ul>
 
-          <li th:if="${session.usersession != null}" class="nav-item dropdown link">
+          <li th:if="${session.usersession != null and session.usersession.getRol().toString() != 'USER'}" class="nav-item dropdown link">
             <a class="nav-link dropdown-toggle active" 
                role="button" 
                data-bs-toggle="dropdown" 
@@ -21,7 +21,7 @@
             </ul>
           </li>
 
-          <li th:if="${session.usersession != null}" class="nav-item dropdown link">
+          <li th:if="${session.usersession != null and session.usersession.getRol().toString() != 'USER'}" class="nav-item dropdown link">
             <a class="nav-link dropdown-toggle active" 
                role="button" 
                data-bs-toggle="dropdown" 

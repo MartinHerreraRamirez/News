@@ -32,7 +32,7 @@ public class UsersController {
     @PostMapping("/registration")
     public String registration(
     @RequestParam String name,
-    @RequestParam String lastName,
+    @RequestParam String lastname,
     @RequestParam String email,
     @RequestParam String phone,
     @RequestParam String password,
@@ -42,7 +42,7 @@ public class UsersController {
     ModelMap model){
 
         try {
-            usersService.createUser(name, lastName, email, phone, password, password2, idRol, file);
+            usersService.createUser(name, lastname, email, phone, password, password2, idRol, file);
             model.put("success", "The user has been created successfully");
             
             return "redirect:/login";
@@ -51,7 +51,7 @@ public class UsersController {
             model.put("error", e.getMessage());
 
             model.put("name", name);
-            model.put("lastName", lastName);
+            model.put("lastname", lastname);
             model.put("email", email);
             model.put("phone", phone);
             model.put("file", file);
@@ -68,7 +68,7 @@ public class UsersController {
     @PostMapping("/profile")
     public String editProfile(
     @RequestParam String name,
-    @RequestParam String lastName,
+    @RequestParam String lastname,
     @RequestParam String email,
     @RequestParam String phone,
     HttpSession session,
@@ -81,7 +81,7 @@ public class UsersController {
             model.put("success", "The data has been updated");
 
             user.setName(name);
-            user.setLastName(lastName);
+            user.setLastname(lastname);
             user.setEmail(email);
             user.setPhone(phone);
     
@@ -91,7 +91,7 @@ public class UsersController {
             model.put("error", "error updating data");
 
             model.put("name", name);
-            model.put("lastName", lastName);
+            model.put("lastname", lastname);
             model.put("email", email);
             model.put("phone", phone);
 

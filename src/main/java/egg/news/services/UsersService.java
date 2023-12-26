@@ -51,7 +51,7 @@ public class UsersService implements UserDetailsService{
     @Transactional
     public void createUser(
     String name,
-    String lastName,
+    String lastname,
     String email,
     String phone,
     String password,
@@ -59,13 +59,13 @@ public class UsersService implements UserDetailsService{
     String idRol,
     MultipartFile file) throws MyExceptions, Exception{
 
-        validate(name, lastName, email, phone, password, password2);        
+        validate(name, lastname, email, phone, password, password2);        
         
         if(idRol.equals("USER")){
             Users user = new Users();
             
             user.setName(name);
-            user.setLastName(lastName);
+            user.setLastname(lastname);
             user.setEmail(email);
             user.setPhone(phone);
             user.setPassword(new BCryptPasswordEncoder().encode(password));
@@ -84,7 +84,7 @@ public class UsersService implements UserDetailsService{
             Journalist journalist = new Journalist();
 
             journalist.setName(name);
-            journalist.setLastName(lastName);
+            journalist.setLastname(lastname);
             journalist.setEmail(email);
             journalist.setPhone(phone);
             journalist.setPassword(new BCryptPasswordEncoder().encode(password));
@@ -105,14 +105,14 @@ public class UsersService implements UserDetailsService{
     public void modifyUser(
     String idUser,
     String name,
-    String lastName,
+    String lastname,
     String email,
     String phone,
     String password,
     String password2,
     MultipartFile file) throws MyExceptions, Exception{
 
-        validate(name, lastName, email, phone, password, password2);
+        validate(name, lastname, email, phone, password, password2);
 
         Optional<Users> responseUser = usersRepository.findById(idUser);
 
@@ -155,7 +155,7 @@ public class UsersService implements UserDetailsService{
 
     public void validate(
     String name, 
-    String lastName,
+    String lastname,
     String email, 
     String phone, 
     String password, 
@@ -165,7 +165,7 @@ public class UsersService implements UserDetailsService{
             throw new MyExceptions("The name is empty or null");
         }
 
-        if(lastName.isEmpty() || lastName == null){
+        if(lastname.isEmpty() || lastname == null){
             throw new MyExceptions("The name is empty or null");
         }
 
@@ -224,9 +224,9 @@ public class UsersService implements UserDetailsService{
         Users user = null;
 
         if(username.contains("@")){
-            user = usersRepository.searchByEmail(username);
+            user = usersRepository.findUserByEmail(username);
         } else {
-            user = usersRepository.searchByPhone(username);
+            user = usersRepository.findUserByPhone(username);
         }
 
         if(user != null){

@@ -1,6 +1,4 @@
-.main{
-    height: 100vh;
-}
+
 .form{
     display: flex;    
     flex-direction: column;    

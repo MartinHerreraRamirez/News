@@ -8,19 +8,20 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import egg.news.enums.Rol;
 import egg.news.exceptions.MyExceptions;
-import egg.news.models.Journalist;
-import egg.news.repositories.IJournalistRepository;
+import egg.news.models.Users;
+import egg.news.repositories.IUsersRepository;
 
 @Service
 public class JournalistService {
 
     @Autowired
-    private IJournalistRepository journalistRepository;   
+    private IUsersRepository usersRepository;  
 
-    public List<Journalist> findAllJournalists(){
+    public List<Users> findAllJournalists(){
 
-        List<Journalist> journalists = journalistRepository.findAll();
+        List<Users> journalists = usersRepository.findUsersByRol(Rol.JOURNALIST);
         
         return journalists;
     }
@@ -30,40 +31,40 @@ public class JournalistService {
 
         validate(name, lastname);
 
-        Optional<Journalist> responseJournalist = journalistRepository.findById(id);
+        Optional<Users> responseJournalist = usersRepository.findById(id);
 
         if(responseJournalist.isPresent()){
 
-            Journalist Journalist = responseJournalist.get();
+            Users Journalist = responseJournalist.get();
 
             Journalist.setName(name);
-            Journalist.setLastName(lastname);
+            Journalist.setLastname(lastname);
 
-            journalistRepository.save(Journalist);
+            usersRepository.save(Journalist);
         }
     }
 
     @Transactional
     public void deleteJournalist(String id) throws Exception{
 
-        Optional<Journalist> JournalistResponse = journalistRepository.findById(id);
+        Optional<Users> JournalistResponse = usersRepository.findById(id);
 
         if(JournalistResponse.isPresent()){
-            Journalist journalist = JournalistResponse.get();
+            Users journalist = JournalistResponse.get();
 
             if(journalist.getIsActive()){
                 journalist.setIsActive(false);
-                journalistRepository.save(journalist);
+                usersRepository.save(journalist);
             } else {
                 journalist.setIsActive(true);
-                journalistRepository.save(journalist);
+                usersRepository.save(journalist);
             }
         }
     }
 
-    public Journalist getJournalistById(String id){
+    public Users getJournalistById(String id){
 
-        return journalistRepository.getReferenceById(id);
+        return usersRepository.getReferenceById(id);
     }
 
     private void validate(String name, String lastname) throws MyExceptions{

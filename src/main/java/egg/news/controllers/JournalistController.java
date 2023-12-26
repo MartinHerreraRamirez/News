@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import egg.news.exceptions.MyExceptions;
 import egg.news.models.Journalist;
+import egg.news.models.Users;
 import egg.news.services.JournalistService;
 
 @Controller
@@ -24,7 +25,7 @@ public class JournalistController {
     
     @GetMapping("/list")
     public String list(ModelMap model){
-        List<Journalist> journalists = JournalistService.findAllJournalists();
+        List<Users> journalists = JournalistService.findAllJournalists();
         model.addAttribute("journalists", journalists);
 
         return "Journalist-list";

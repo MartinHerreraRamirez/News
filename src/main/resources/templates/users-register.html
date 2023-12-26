@@ -10,14 +10,13 @@
 
     <header th:replace="/fragments/header :: header"></header>
 
-    <main class="main"> 
+    <main class="content"> 
 
         <div th:if="${error} != null">
             <p class="error" th:text="${error}"></p>
         </div>
         
-        <form class="form-register" th:action="@{/user/registration}" method="post" enctype="multipart/form-data">
-            
+        <form class="form-register" th:action="@{/user/registration}" method="post" enctype="multipart/form-data">            
 
             <div class="container">             
                 
@@ -25,8 +24,8 @@
                     <label class="fw-bold" for="name">Name</label>
                     <input type="text" id="name" name="name" th:value="${name}">
                     
-                    <label class="fw-bold" for="lastName">Lastname</label>
-                    <input type="text" id="lastName" name="lastName" th:value="${lastName}">                    
+                    <label class="fw-bold" for="lastname">lastname</label>
+                    <input type="text" id="lastname" name="lastname" th:value="${lastname}">                    
                 </div>
 
                 <div class="d-flex flex-row mb-2">

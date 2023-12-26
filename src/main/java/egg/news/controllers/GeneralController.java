@@ -51,8 +51,10 @@ public class GeneralController {
 
         if(currentUser.getRol().toString().equals("ADMIN")){
             return "redirect:/admin/dashboard";
+        } else {
+            return "redirect:/login";
+
         }
         
-        return "index";
     }    
 }

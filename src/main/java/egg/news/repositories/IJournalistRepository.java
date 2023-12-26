@@ -8,7 +8,7 @@ import egg.news.models.Journalist;
 @Repository
 public interface IJournalistRepository extends JpaRepository<Journalist, String>{ 
 
-
+    
     
 } 
     

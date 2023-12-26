@@ -26,7 +26,7 @@ public class Users {
     private String id;
 
     private String name;
-    private String lastName;
+    private String lastname;
     private String email;
     private String password;
     private String phone;
