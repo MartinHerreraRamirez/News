@@ -25,7 +25,9 @@ import org.springframework.web.multipart.MultipartFile;
 import egg.news.enums.Rol;
 import egg.news.exceptions.MyExceptions;
 import egg.news.models.Image;
+import egg.news.models.Journalist;
 import egg.news.models.Users;
+import egg.news.repositories.IJournalistRepository;
 import egg.news.repositories.IUsersRepository;
 
 @Service
@@ -33,6 +35,9 @@ public class UsersService implements UserDetailsService{
 
     @Autowired
     private IUsersRepository usersRepository;
+
+    @Autowired
+    private IJournalistRepository journalistRepository;
 
     @Autowired
     private ImageService imageService;
@@ -54,30 +59,46 @@ public class UsersService implements UserDetailsService{
     String idRol,
     MultipartFile file) throws MyExceptions, Exception{
 
-        validate(name, lastName, email, phone, password, password2);
-
-        Users user = new Users();
-
-        user.setName(name);
-        user.setLastName(lastName);
-        user.setEmail(email);
-        user.setPhone(phone);
-        user.setPassword(new BCryptPasswordEncoder().encode(password));
-
+        validate(name, lastName, email, phone, password, password2);        
+        
         if(idRol.equals("USER")){
+            Users user = new Users();
+            
+            user.setName(name);
+            user.setLastName(lastName);
+            user.setEmail(email);
+            user.setPhone(phone);
+            user.setPassword(new BCryptPasswordEncoder().encode(password));
             user.setRol(Rol.USER);
+            user.setHighDate(new Date());
+            user.setIsActive(true);
+            
+            Image image = imageService.saveImage(file);
+            
+            user.setImage(image);
+            
+            usersRepository.save(user);       
+
         } else {
-            user.setRol(Rol.JOURNALIST);
-        }
 
-        user.setHighDate(new Date());
-        user.setIsActive(true);
+            Journalist journalist = new Journalist();
 
-        Image image = imageService.saveImage(file);
+            journalist.setName(name);
+            journalist.setLastName(lastName);
+            journalist.setEmail(email);
+            journalist.setPhone(phone);
+            journalist.setPassword(new BCryptPasswordEncoder().encode(password));
+            journalist.setRol(Rol.JOURNALIST);  
+            journalist.setHighDate(new Date());          
+            journalist.setIsActive(true);
+            journalist.setSalary(null);
 
-        user.setImage(image);
+            Image image = imageService.saveImage(file);
 
-        usersRepository.save(user);          
+            journalist.setImage(image);
+
+            journalistRepository.save(journalist);
+        }        
     }
 
     @Transactional

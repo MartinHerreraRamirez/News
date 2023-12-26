@@ -64,6 +64,7 @@ public class JournalistController {
     public String deleteJournalist(Journalist journalist, ModelMap model){
         
         try {
+            
             JournalistService.deleteJournalist(journalist.getId());
             return "redirect:/journalist/list";
             

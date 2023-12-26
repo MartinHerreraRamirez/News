@@ -16,27 +16,13 @@ import egg.news.repositories.IJournalistRepository;
 public class JournalistService {
 
     @Autowired
-    private IJournalistRepository JournalistRepository;
-
-    @Transactional
-    public void createJournalist(String name, String lastname) throws MyExceptions{
-
-        validate(name, lastname);
-
-        Journalist Journalist = new Journalist();
-
-        Journalist.setName(name);
-        Journalist.setLastName(lastname);
-        Journalist.setIsActive(true);
-
-        JournalistRepository.save(Journalist);
-    }
+    private IJournalistRepository journalistRepository;   
 
     public List<Journalist> findAllJournalists(){
 
-        List<Journalist> Journalists = JournalistRepository.findAll();
+        List<Journalist> journalists = journalistRepository.findAll();
         
-        return Journalists;
+        return journalists;
     }
 
     @Transactional
@@ -44,7 +30,7 @@ public class JournalistService {
 
         validate(name, lastname);
 
-        Optional<Journalist> responseJournalist = JournalistRepository.findById(id);
+        Optional<Journalist> responseJournalist = journalistRepository.findById(id);
 
         if(responseJournalist.isPresent()){
 
@@ -53,25 +39,31 @@ public class JournalistService {
             Journalist.setName(name);
             Journalist.setLastName(lastname);
 
-            JournalistRepository.save(Journalist);
+            journalistRepository.save(Journalist);
         }
     }
 
     @Transactional
     public void deleteJournalist(String id) throws Exception{
 
-        Optional<Journalist> JournalistResponse = JournalistRepository.findById(id);
+        Optional<Journalist> JournalistResponse = journalistRepository.findById(id);
 
         if(JournalistResponse.isPresent()){
-            Journalist Journalist = JournalistResponse.get();
-            Journalist.setIsActive(false);
-            JournalistRepository.save(Journalist);
+            Journalist journalist = JournalistResponse.get();
+
+            if(journalist.getIsActive()){
+                journalist.setIsActive(false);
+                journalistRepository.save(journalist);
+            } else {
+                journalist.setIsActive(true);
+                journalistRepository.save(journalist);
+            }
         }
     }
 
     public Journalist getJournalistById(String id){
 
-        return JournalistRepository.getReferenceById(id);
+        return journalistRepository.getReferenceById(id);
     }
 
     private void validate(String name, String lastname) throws MyExceptions{

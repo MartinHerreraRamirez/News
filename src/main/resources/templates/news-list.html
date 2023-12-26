@@ -10,35 +10,39 @@
     
     <header th:replace="/fragments/header :: header"></header>
 
-    <main class="content overflow-y-auto">
-        
-        <h2 class="text-center my-4 fw-bold">List of News</h2>
-        
-        <div th:if="${success} != null">
-            <p th:text="${success}"></p>
-        </div>
-        
-        <table class="table">
-            <thead class="table-info">
-                <tr>
-                    <th scope="col">Title</th>
-                    <th scope="col">Date</th>
-                    <th scope="col">Journalist</th>
-                    <th scope="col" sec:Journalistize="hasRole('ADMIN')">actions</th>
-                </tr>
-            </thead>
-            <tbody th:each="news : ${news}">
-                <tr>
-                    <td th:text="${news.title}"></td>
-                    <td th:text="${news.postDate}"></td>
-                    <td th:text="${news.Journalist.name}"></td>
-                    <td sec:Journalistize="hasRole('ADMIN')">
-                        <a th:href="@{/news/modify/__${news.id}__}">Edit</a>
-                        <a th:href="@{/news/delete(id=${news.id})}">Delete</a>
-                    </td>
-                </tr>
-            </tbody>
-        </table>    
+    <main class="content">
+
+        <section class="container overflow-y-auto">
+
+            
+            <h2 class="text-center my-4 fw-bold">List of News</h2>
+            
+            <div th:if="${success} != null">
+                <p th:text="${success}"></p>
+            </div>
+            
+            <table class="table">
+                <thead class="table-info">
+                    <tr>
+                        <th scope="col">Title</th>
+                        <th scope="col">Date</th>
+                        <th scope="col">Journalist</th>
+                        <th scope="col" sec:Journalistize="hasRole('ADMIN')">actions</th>
+                    </tr>
+                </thead>
+                <tbody th:each="news : ${news}">
+                    <tr>
+                        <td th:text="${news.title}"></td>
+                        <td th:text="${news.postDate}"></td>
+                        <td th:text="${news.Journalist.name}"></td>
+                        <td sec:Journalistize="hasRole('ADMIN')">
+                            <a th:href="@{/news/modify/__${news.id}__}">Edit</a>
+                            <a th:href="@{/news/delete(id=${news.id})}">Delete</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>    
+        </section>
         
     </main>
     
