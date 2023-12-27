@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import egg.news.models.Journalist;
 import egg.news.models.News;
-import egg.news.models.Users;
 import egg.news.services.JournalistService;
 import egg.news.services.NewsService;
 
@@ -30,7 +30,7 @@ public class NewsController {
     @GetMapping("/register")
     public String registerNews(ModelMap model){
 
-        List<Users> journalists = JournalistService.findAllJournalists();
+        List<Journalist> journalists = JournalistService.findAllJournalists();
         
         model.addAttribute("journalists", journalists);
 
@@ -52,7 +52,7 @@ public class NewsController {
             
         } catch (Exception e) {
 
-            List<Users> Journalists = JournalistService.findAllJournalists();
+            List<Journalist> Journalists = JournalistService.findAllJournalists();
             model.addAttribute("Journalists", Journalists);
             model.put("error", e.getMessage());
 
@@ -82,7 +82,7 @@ public class NewsController {
     public String modifyNew(@PathVariable String id, ModelMap model){
 
         News news = newsService.findNewsById(id);
-        List<Users> JournalistList = JournalistService.findAllJournalists();
+        List<Journalist> JournalistList = JournalistService.findAllJournalists();
         
         model.put("news", news);
         model.addAttribute("Journalists",JournalistList);

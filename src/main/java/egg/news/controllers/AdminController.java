@@ -8,8 +8,8 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import egg.news.models.Journalist;
 import egg.news.models.News;
-import egg.news.models.Users;
 import egg.news.services.JournalistService;
 import egg.news.services.NewsService;
 
@@ -29,7 +29,7 @@ public class AdminController {
         List<News> news = newsService.findAllNews();
         model.addAttribute("news", news);
 
-        List<Users> Journalists = JournalistService.findAllJournalists();
+        List<Journalist> Journalists = JournalistService.findAllJournalists();
         model.addAttribute("Journalists",Journalists);
 
         return "dashboard";

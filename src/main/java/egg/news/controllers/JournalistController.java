@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import egg.news.exceptions.MyExceptions;
 import egg.news.models.Journalist;
-import egg.news.models.Users;
 import egg.news.services.JournalistService;
 
 @Controller
@@ -25,7 +24,7 @@ public class JournalistController {
     
     @GetMapping("/list")
     public String list(ModelMap model){
-        List<Users> journalists = JournalistService.findAllJournalists();
+        List<Journalist> journalists = JournalistService.findAllJournalists();
         model.addAttribute("journalists", journalists);
 
         return "Journalist-list";
@@ -48,12 +47,11 @@ public class JournalistController {
     @RequestParam String lastname,   
     @RequestParam String email,
     @RequestParam String phone,
-    @RequestParam String password,
-    @RequestParam String password2,
+    @RequestParam String salary,   
     ModelMap model){
 
         try{
-            JournalistService.modifyJournalist(id,name, lastname, email, phone, password, password2);
+            JournalistService.modifyJournalist(id, name, lastname, email, phone, salary);
             model.put("success", "The Journalist has been modified successfully.");
     
             return "redirect:/journalist/list";

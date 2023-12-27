@@ -62,6 +62,7 @@ public class UsersService implements UserDetailsService{
         validate(name, lastname, email, phone, password, password2);        
         
         if(idRol.equals("USER")){
+            
             Users user = new Users();
             
             user.setName(name);
@@ -91,7 +92,7 @@ public class UsersService implements UserDetailsService{
             journalist.setRole(Role.JOURNALIST);  
             journalist.setHighDate(new Date());          
             journalist.setIsActive(true);
-            journalist.setSalary(null);
+            journalist.setSalary("0");
 
             Image image = imageService.saveImage(file);
 

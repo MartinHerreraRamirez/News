@@ -6,83 +6,91 @@ import java.util.Optional;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import egg.news.enums.Role;
 import egg.news.exceptions.MyExceptions;
+import egg.news.models.Journalist;
 import egg.news.models.Users;
+import egg.news.repositories.IJournalistRepository;
 import egg.news.repositories.IUsersRepository;
 
 @Service
-public class JournalistService {
+public class JournalistService {     
 
     @Autowired
-    private IUsersRepository usersRepository;  
+    private IJournalistRepository journalistRepository;
 
-    public List<Users> findAllJournalists(){
+    @Autowired
+    private IUsersRepository usersRepository;
 
-        List<Users> journalists = usersRepository.findUsersByRol(Role.JOURNALIST);
+    public List<Journalist> findAllJournalists(){
+
+        List<Journalist> journalists = journalistRepository.findUsersByRol(Role.JOURNALIST);
         
         return journalists;
     }
 
     @Transactional
-    public void modifyJournalist(String id, String name, String lastname, String email, String phone, String password, String password2) throws MyExceptions{
+    public void modifyJournalist(String id, String name, String lastname, String email, String phone, String salary) throws MyExceptions{
 
-        validate(name, lastname, email, phone, password, password2);
+        validate(name, lastname, email, phone, salary);
 
         Optional<Users> responseJournalist = usersRepository.findById(id);
 
         if(responseJournalist.isPresent()){
 
-            Users journalist = responseJournalist.get();
+            Journalist journalist = (Journalist) responseJournalist.get();
 
             journalist.setName(name);
             journalist.setLastname(lastname);
             journalist.setEmail(email);
             journalist.setPhone(phone);
-            journalist.setPassword(new BCryptPasswordEncoder().encode(password));
+            journalist.setSalary(salary);
 
-            usersRepository.save(journalist);
+            journalistRepository.save(journalist);
         }
     }
 
     @Transactional
     public void deleteJournalist(String id) throws Exception{
 
-        Optional<Users> JournalistResponse = usersRepository.findById(id);
+        Optional<Journalist> JournalistResponse = journalistRepository.findById(id);
 
         if(JournalistResponse.isPresent()){
-            Users journalist = JournalistResponse.get();
+            Journalist journalist = JournalistResponse.get();
 
             if(journalist.getIsActive()){
                 journalist.setIsActive(false);
-                usersRepository.save(journalist);
+                journalistRepository.save(journalist);
             } else {
                 journalist.setIsActive(true);
-                usersRepository.save(journalist);
+                journalistRepository.save(journalist);
             }
         }
     }
 
-    public Users getJournalistById(String id){
+    public Journalist getJournalistById(String id){
 
-        return usersRepository.getReferenceById(id);
+        return journalistRepository.getReferenceById(id);
     }
 
-    private void validate(String name, String lastname, String email, String phone, String password, String password2) throws MyExceptions{
+    private void validate(String name, String lastname, String email, String phone, String salary) throws MyExceptions{
 
-        if(name.isEmpty()){
-            throw new MyExceptions("The name is empty");
+        if(name.isEmpty() || name == null){
+            throw new MyExceptions("The name don't can be empty or null");
         }
 
-        if(lastname.isEmpty()){
-            throw new MyExceptions("The lastname is empty");
+        if(lastname.isEmpty() || lastname == null){
+            throw new MyExceptions("The lastname don't can be empty or null");
         }
 
-        if(email.isEmpty()){
-            throw new MyExceptions("The email is empty");
+        if(email.isEmpty() || email == null){
+            throw new MyExceptions("The email don't can be empty or null");
+        }
+
+        if(!email.contains("@")){
+            throw new MyExceptions("The email does not contain the '@' character.");
         }
 
         if(email.length() < 8){
@@ -93,8 +101,8 @@ public class JournalistService {
             throw new MyExceptions("The email can not contain more than 255 characters");
         }
 
-        if(phone.isEmpty()){
-            throw new MyExceptions("The number phone is empty");
+        if(phone.isEmpty() || phone == null){
+            throw new MyExceptions("The number phone is empty or null");
         }
 
         if(phone.length() < 9){
@@ -105,20 +113,9 @@ public class JournalistService {
             throw new MyExceptions("The number phone don't can contain more than 15 characters");
         }
 
-        if(password.isEmpty()){
-            throw new MyExceptions("The password is empty");
+        if(salary.isEmpty() || salary == null){
+            throw new MyExceptions("The salary don't cant be empty or null");
         }
 
-        if(password2.isEmpty()){
-            throw new MyExceptions("You must confirm the password");
-        }
-
-        if (password.length() != password2.length()) {
-            throw new MyExceptions("Passwords do not match");
-        }
-
-        if(!password.equals(password2)){
-            throw new MyExceptions("Password and confirmation password are different");
-        }
     }    
 }

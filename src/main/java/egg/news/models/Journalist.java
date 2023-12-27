@@ -11,6 +11,6 @@ import lombok.EqualsAndHashCode;
 public class Journalist extends Users{
 
     private ArrayList<News> myNews;        
-    private Integer salary;
+    private String salary;
 
 }

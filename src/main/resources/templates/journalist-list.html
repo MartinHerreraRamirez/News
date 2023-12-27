@@ -33,8 +33,7 @@
                         <td th:text="${journalist.isActive}"></td>
                         <td th:text="${journalist.salary}"></td>
                        
-                        <td sec:journalistize="hasRole('ADMIN')">
-                            <a class="me-3 btn btn-success text-white" sec:authorize="hasRole('ADMIN')" th:href="@{/journalist/edit/salary/__${journalist.id}__}">Edit Salary</a>
+                        <td sec:authorize="hasRole('ADMIN')">
                             <a class="me-3 btn btn-warning text-white" sec:authorize="hasRole('ADMIN')" th:href="@{/journalist/modify/__${journalist.id}__}">Edit Journalist</a>
                             <a class="btn btn-danger" sec:authorize="hasRole('ADMIN')" th:href="@{/journalist/delete(id=${journalist.id})}">Edit State</a>
                         </td>
