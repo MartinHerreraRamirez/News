@@ -49,7 +49,7 @@ public class GeneralController {
 
         Users currentUser = (Users) session.getAttribute("usersession");
 
-        if(currentUser.getRol().toString().equals("ADMIN")){
+        if(currentUser.getRole().toString().equals("ADMIN")){
             return "redirect:/admin/dashboard";
         } else {
             return "redirect:/login";

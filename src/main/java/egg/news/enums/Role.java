@@ -1,6 +1,6 @@
 package egg.news.enums;
 
-public enum Rol {
+public enum Role {
     ADMIN,
     JOURNALIST,
     USER;

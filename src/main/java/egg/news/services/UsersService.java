@@ -22,7 +22,7 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.multipart.MultipartFile;
 
-import egg.news.enums.Rol;
+import egg.news.enums.Role;
 import egg.news.exceptions.MyExceptions;
 import egg.news.models.Image;
 import egg.news.models.Journalist;
@@ -42,10 +42,10 @@ public class UsersService implements UserDetailsService{
     @Autowired
     private ImageService imageService;
 
-    public ArrayList<Rol> deleteAdminRol(){
-        ArrayList<Rol> rols = new ArrayList<>(Arrays.asList(Rol.values()));
-        rols.remove(0); 
-        return rols;
+    public ArrayList<Role> deleteAdminRol(){
+        ArrayList<Role> roles = new ArrayList<>(Arrays.asList(Role.values()));
+        roles.remove(0); 
+        return roles;
     }
 
     @Transactional
@@ -69,7 +69,7 @@ public class UsersService implements UserDetailsService{
             user.setEmail(email);
             user.setPhone(phone);
             user.setPassword(new BCryptPasswordEncoder().encode(password));
-            user.setRol(Rol.USER);
+            user.setRole(Role.USER);
             user.setHighDate(new Date());
             user.setIsActive(true);
             
@@ -88,7 +88,7 @@ public class UsersService implements UserDetailsService{
             journalist.setEmail(email);
             journalist.setPhone(phone);
             journalist.setPassword(new BCryptPasswordEncoder().encode(password));
-            journalist.setRol(Rol.JOURNALIST);  
+            journalist.setRole(Role.JOURNALIST);  
             journalist.setHighDate(new Date());          
             journalist.setIsActive(true);
             journalist.setSalary(null);
@@ -126,7 +126,7 @@ public class UsersService implements UserDetailsService{
             user.setEmail(email);
             user.setPhone(phone);
             user.setPassword(new BCryptPasswordEncoder().encode(password));  
-            user.setRol(Rol.USER);
+            user.setRole(Role.USER);
             
             String idImage = null;
 
@@ -206,7 +206,7 @@ public class UsersService implements UserDetailsService{
         }
 
         if(password.length() < 8 || password2.length() < 8){
-            throw new MyExceptions("The password must be at least 8 charactes long");
+            throw new MyExceptions("The password must be at least 8 characters long");
         }
 
         if(password.length() > 64 || password2.length() > 64){
@@ -233,7 +233,7 @@ public class UsersService implements UserDetailsService{
 
             List<GrantedAuthority> permit = new ArrayList<>();
 
-            permit.add(new SimpleGrantedAuthority("ROLE_" + user.getRol().toString()));
+            permit.add(new SimpleGrantedAuthority("ROLE_" + user.getRole().toString()));
 
             ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
 

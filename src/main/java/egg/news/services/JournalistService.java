@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import egg.news.enums.Rol;
+import egg.news.enums.Role;
 import egg.news.exceptions.MyExceptions;
 import egg.news.models.Users;
 import egg.news.repositories.IUsersRepository;
@@ -22,7 +22,7 @@ public class JournalistService {
 
     public List<Users> findAllJournalists(){
 
-        List<Users> journalists = usersRepository.findUsersByRol(Rol.JOURNALIST);
+        List<Users> journalists = usersRepository.findUsersByRol(Role.JOURNALIST);
         
         return journalists;
     }

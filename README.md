@@ -63,7 +63,7 @@ La entidad Usuario modela los usuarios que se registran y loguean en la web. Est
 #### • String nombreUsuario
 #### • String password
 #### • Date fecha de alta.
-#### • Rol rol
+#### • Rol role
 #### • Boolean activo
 
 > [!IMPORTANT]

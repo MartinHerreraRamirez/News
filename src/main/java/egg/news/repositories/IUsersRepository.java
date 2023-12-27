@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import egg.news.enums.Rol;
+import egg.news.enums.Role;
 import egg.news.models.Users;
 
 @Repository
@@ -19,6 +19,6 @@ public interface IUsersRepository extends JpaRepository<Users, String>{
     @Query("SELECT u FROM Users u WHERE u.phone = :phone")
     public Users findUserByPhone(@Param("phone") String phone);
 
-    @Query("SELECT u FROM Users u WHERE u.rol = :rol")
-    public List<Users> findUsersByRol(@Param("rol") Rol rol);
+    @Query("SELECT u FROM Users u WHERE u.role = :role")
+    public List<Users> findUsersByRol(@Param("role") Role role);
 }

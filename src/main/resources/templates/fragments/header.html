@@ -7,7 +7,7 @@
         
         <ul>
 
-          <li th:if="${session.usersession != null and session.usersession.getRol().toString() != 'USER'}" class="nav-item dropdown link">
+          <li th:if="${session.usersession != null and session.usersession.getRole().toString() != 'USER'}" class="nav-item dropdown link">
             <a class="nav-link dropdown-toggle active" 
                role="button" 
                data-bs-toggle="dropdown" 
@@ -21,7 +21,7 @@
             </ul>
           </li>
 
-          <li th:if="${session.usersession != null and session.usersession.getRol().toString() != 'USER'}" class="nav-item dropdown link">
+          <li th:if="${session.usersession != null and session.usersession.getRole().toString() != 'USER'}" class="nav-item dropdown link">
             <a class="nav-link dropdown-toggle active" 
                role="button" 
                data-bs-toggle="dropdown" 
@@ -45,8 +45,8 @@
                <img class="image-profile" th:src="@{/image/profile/__${session.usersession.id}__}" alt="image user">
             </a>
             <ul class="dropdown-menu">
-              <li th:if="${session.usersession.getRol().toString() == 'ADMIN'}"><a class="dropdown-item link" th:href="@{/admin/dashboard}">Dashboard</a></li>
-              <li th:if="${session.usersession.getRol().toString() == 'USER'}"><a class="dropdown-item link" th:href="@{/}">Start</a></li>
+              <li th:if="${session.usersession.getRole().toString() == 'ADMIN'}"><a class="dropdown-item link" th:href="@{/admin/dashboard}">Dashboard</a></li>
+              <li th:if="${session.usersession.getRole().toString() == 'USER'}"><a class="dropdown-item link" th:href="@{/}">Start</a></li>
               <li><a class="dropdown-item link" th:href="@{/logout}">Logout</a></li>
             </ul>
           </li>

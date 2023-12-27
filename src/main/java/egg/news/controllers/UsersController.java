@@ -24,7 +24,7 @@ public class UsersController {
     @GetMapping("/register")
     public String register(ModelMap model){               
         
-        model.addAttribute("rols", usersService.deleteAdminRol());
+        model.addAttribute("roles", usersService.deleteAdminRol());
 
         return "users-register";
     }

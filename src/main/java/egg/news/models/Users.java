@@ -13,7 +13,7 @@ import javax.persistence.TemporalType;
 
 import org.hibernate.annotations.GenericGenerator;
 
-import egg.news.enums.Rol;
+import egg.news.enums.Role;
 import lombok.Data;
 
 @Entity
@@ -39,6 +39,6 @@ public class Users {
     private Image image;
 
     @Enumerated(EnumType.STRING)
-    private Rol rol; 
+    private Role role; 
     
 }

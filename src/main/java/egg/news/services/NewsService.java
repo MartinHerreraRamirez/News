@@ -64,11 +64,11 @@ public class NewsService {
         Optional<News> responseNews = newsRepository.findById(id);
         Optional<Journalist> responseJournalist = JournalistRepository.findById(idJournalist);
 
-        Journalist autor = new Journalist();
+        Journalist journalist = new Journalist();
 
         if(responseJournalist.isPresent()){
 
-            autor = responseJournalist.get();
+            journalist = responseJournalist.get();
         }
 
         if(responseNews.isPresent()){
@@ -78,7 +78,7 @@ public class NewsService {
             news.setTitle(title);
             news.setBody(body);
             news.setPostDate(new Date());
-            news.setJournalist(autor);
+            news.setJournalist(journalist);
 
             newsRepository.save(news);
         }
