@@ -35,7 +35,7 @@ public class JournalistController {
     @GetMapping("/modify/{id}")
     public String modify(@PathVariable String id, ModelMap model){
 
-        model.put("Journalist", JournalistService.getJournalistById(id));
+        model.put("journalist", JournalistService.getJournalistById(id));
 
         return "journalist-modify";
     }
@@ -43,13 +43,17 @@ public class JournalistController {
 
     @PostMapping("/modify/{id}")
     public String modify(
-    @PathVariable String id, 
-    @RequestParam String name, 
-    @RequestParam String lastname, 
+    @PathVariable String id,   
+    @RequestParam String name,
+    @RequestParam String lastname,   
+    @RequestParam String email,
+    @RequestParam String phone,
+    @RequestParam String password,
+    @RequestParam String password2,
     ModelMap model){
 
         try{
-            JournalistService.modifyJournalist(id, name, lastname);
+            JournalistService.modifyJournalist(id,name, lastname, email, phone, password, password2);
             model.put("success", "The Journalist has been modified successfully.");
     
             return "redirect:/journalist/list";

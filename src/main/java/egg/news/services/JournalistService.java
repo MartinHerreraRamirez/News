@@ -6,6 +6,7 @@ import java.util.Optional;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import egg.news.enums.Rol;
@@ -27,20 +28,23 @@ public class JournalistService {
     }
 
     @Transactional
-    public void modifyJournalist(String id, String name, String lastname) throws MyExceptions{
+    public void modifyJournalist(String id, String name, String lastname, String email, String phone, String password, String password2) throws MyExceptions{
 
-        validate(name, lastname);
+        validate(name, lastname, email, phone, password, password2);
 
         Optional<Users> responseJournalist = usersRepository.findById(id);
 
         if(responseJournalist.isPresent()){
 
-            Users Journalist = responseJournalist.get();
+            Users journalist = responseJournalist.get();
 
-            Journalist.setName(name);
-            Journalist.setLastname(lastname);
+            journalist.setName(name);
+            journalist.setLastname(lastname);
+            journalist.setEmail(email);
+            journalist.setPhone(phone);
+            journalist.setPassword(new BCryptPasswordEncoder().encode(password));
 
-            usersRepository.save(Journalist);
+            usersRepository.save(journalist);
         }
     }
 
@@ -67,7 +71,7 @@ public class JournalistService {
         return usersRepository.getReferenceById(id);
     }
 
-    private void validate(String name, String lastname) throws MyExceptions{
+    private void validate(String name, String lastname, String email, String phone, String password, String password2) throws MyExceptions{
 
         if(name.isEmpty()){
             throw new MyExceptions("The name is empty");
@@ -75,6 +79,46 @@ public class JournalistService {
 
         if(lastname.isEmpty()){
             throw new MyExceptions("The lastname is empty");
+        }
+
+        if(email.isEmpty()){
+            throw new MyExceptions("The email is empty");
+        }
+
+        if(email.length() < 8){
+            throw new MyExceptions("The email can not contain less than 8 characters");
+        }
+
+        if(email.length() > 255){
+            throw new MyExceptions("The email can not contain more than 255 characters");
+        }
+
+        if(phone.isEmpty()){
+            throw new MyExceptions("The number phone is empty");
+        }
+
+        if(phone.length() < 9){
+            throw new MyExceptions("The number phone don't can contain less than 9 characters");
+        }
+
+        if(phone.length() > 15){
+            throw new MyExceptions("The number phone don't can contain more than 15 characters");
+        }
+
+        if(password.isEmpty()){
+            throw new MyExceptions("The password is empty");
+        }
+
+        if(password2.isEmpty()){
+            throw new MyExceptions("You must confirm the password");
+        }
+
+        if (password.length() != password2.length()) {
+            throw new MyExceptions("Passwords do not match");
+        }
+
+        if(!password.equals(password2)){
+            throw new MyExceptions("Password and confirmation password are different");
         }
     }    
 }
