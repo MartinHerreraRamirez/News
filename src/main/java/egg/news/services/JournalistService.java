@@ -11,18 +11,13 @@ import org.springframework.stereotype.Service;
 import egg.news.enums.Role;
 import egg.news.exceptions.MyExceptions;
 import egg.news.models.Journalist;
-import egg.news.models.Users;
 import egg.news.repositories.IJournalistRepository;
-import egg.news.repositories.IUsersRepository;
 
 @Service
 public class JournalistService {     
 
     @Autowired
     private IJournalistRepository journalistRepository;
-
-    @Autowired
-    private IUsersRepository usersRepository;
 
     public List<Journalist> findAllJournalists(){
 
@@ -36,11 +31,11 @@ public class JournalistService {
 
         validate(name, lastname, email, phone, salary);
 
-        Optional<Users> responseJournalist = usersRepository.findById(id);
+        Optional<Journalist> responseJournalist = journalistRepository.findById(id);
 
         if(responseJournalist.isPresent()){
 
-            Journalist journalist = (Journalist) responseJournalist.get();
+            Journalist journalist = responseJournalist.get();
 
             journalist.setName(name);
             journalist.setLastname(lastname);
@@ -75,7 +70,12 @@ public class JournalistService {
         return journalistRepository.getReferenceById(id);
     }
 
-    private void validate(String name, String lastname, String email, String phone, String salary) throws MyExceptions{
+    private void validate(
+    String name, 
+    String lastname, 
+    String email, 
+    String phone, 
+    String salary) throws MyExceptions{
 
         if(name.isEmpty() || name == null){
             throw new MyExceptions("The name don't can be empty or null");

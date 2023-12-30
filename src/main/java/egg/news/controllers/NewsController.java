@@ -48,7 +48,7 @@ public class NewsController {
         try {            
             newsService.createNews(title, body, file, idJournalist);
             model.put("success", "The news has been created successfully");
-            return "news-register";  
+            return "redirect:/news/register";  
             
         } catch (Exception e) {
 

@@ -20,11 +20,11 @@ import egg.news.services.JournalistService;
 public class JournalistController {
 
     @Autowired
-    private JournalistService JournalistService;
+    private JournalistService journalistService;
     
     @GetMapping("/list")
     public String list(ModelMap model){
-        List<Journalist> journalists = JournalistService.findAllJournalists();
+        List<Journalist> journalists = journalistService.findAllJournalists();
         model.addAttribute("journalists", journalists);
 
         return "Journalist-list";
@@ -34,7 +34,7 @@ public class JournalistController {
     @GetMapping("/modify/{id}")
     public String modify(@PathVariable String id, ModelMap model){
 
-        model.put("journalist", JournalistService.getJournalistById(id));
+        model.put("journalist", journalistService.getJournalistById(id));
 
         return "journalist-modify";
     }
@@ -51,13 +51,19 @@ public class JournalistController {
     ModelMap model){
 
         try{
-            JournalistService.modifyJournalist(id, name, lastname, email, phone, salary);
+            journalistService.modifyJournalist(id, name, lastname, email, phone, salary);
             model.put("success", "The Journalist has been modified successfully.");
-    
+            
             return "redirect:/journalist/list";
         }catch(MyExceptions e){
+            model.put("error", e.getMessage());
 
-            model.put("error",e.getMessage());
+            model.put("name", name);
+            model.put("lastname", lastname);
+            model.put("email", email);
+            model.put("phone", phone);
+            model.put("salary", salary);
+
             return "journalist-modify";
         }
     }
@@ -68,7 +74,7 @@ public class JournalistController {
         
         try {
             
-            JournalistService.deleteJournalist(journalist.getId());
+            journalistService.deleteJournalist(journalist.getId());
             return "redirect:/journalist/list";
             
         } catch (Exception e) {
