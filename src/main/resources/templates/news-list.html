@@ -36,8 +36,8 @@
                         <td th:text="${news.postDate}"></td>
                         <td th:text="${news.Journalist.name}"></td>
                         <td sec:authorize="hasRole('ADMIN')">
-                            <a th:href="@{/news/modify/__${news.id}__}">Edit</a>
-                            <a th:href="@{/news/delete(id=${news.id})}">Delete</a>
+                            <a class="btn btn-success px-4" th:href="@{/news/modify/__${news.id}__}">Edit</a>
+                            <a class="btn btn-danger" th:href="@{/news/delete(id=${news.id})}">Delete</a>
                         </td>
                     </tr>
                 </tbody>

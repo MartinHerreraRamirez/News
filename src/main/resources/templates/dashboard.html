@@ -14,16 +14,14 @@
 
         <section>
             
-            <h2 class="fw-bold text-center my-4">List of News</h2>
-
-            <p class="text-end mx-3 mb-0"><a class="button p-2" th:href="@{/news/register}">Create news</a></p>
+            <h2 class="fw-bold text-center my-4 text-capitalize"> summary list news</h2>
     
             <table class="table container mb-5 overflow-y-auto">
-                <thead class="table-info ">
+                <thead class="table-info text-capitalize">
                     <tr>
-                        <th scope="col">Title</th>
-                        <th scope="col">Body</th>
-                        <th scope="col">Journalist</th>                        
+                        <th scope="col">title</th>
+                        <th scope="col">body</th>
+                        <th scope="col">journalist</th>                        
                     </tr>
                 </thead>
                 <tbody th:each="news : ${news}">
@@ -39,15 +37,15 @@
 
         <section class="h-50">
 
-            <h2 class="fw-bold text-center my-4">List of Journalists</h2>
+            <h2 class="fw-bold text-center my-4 text-capitalize">summary list journalists</h2>
 
             <table class="table container mb-5 overflow-y-auto text-center">
-                <thead class="table-info">
+                <thead class="table-info text-capitalize">
                     <tr>
-                        <th scope="col">Name</th>
-                        <th scope="col">Last Name</th>
-                        <th scope="col">High Date</th>
-                        <th scope="col">State</th>                                               
+                        <th scope="col">name</th>
+                        <th scope="col">lastname</th>
+                        <th scope="col">high date</th>
+                        <th scope="col">state</th>                                               
                     </tr>
                 </thead>
                 <tbody th:each="journalist : ${Journalists}">
@@ -55,7 +53,7 @@
                         <th scope="row" th:text="${journalist.name}"></th>
                         <td th:text="${journalist.lastname}"></td>
                         <td th:text="${journalist.highDate}"></td>
-                        <td class="text-capitalize" th:text="${journalist.isActive}"></td>
+                        <td th:text="${journalist.isActive}"></td>
                     </tr>
                 </tbody>
             </table>
