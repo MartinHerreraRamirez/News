@@ -229,7 +229,7 @@ public class UsersService implements UserDetailsService{
         } else {
             user = usersRepository.findUserByPhone(username);
         }
-
+       
         if(user != null){
 
             List<GrantedAuthority> permit = new ArrayList<>();

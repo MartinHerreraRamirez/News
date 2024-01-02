@@ -21,13 +21,13 @@
                 <p th:text="${success}"></p>
             </div>
             
-            <table class="table">
-                <thead class="table-info">
+            <table class="table text-center">
+                <thead class="table-info ">
                     <tr>
                         <th scope="col">Title</th>
                         <th scope="col">Date</th>
                         <th scope="col">Journalist</th>
-                        <th scope="col" sec:Journalistize="hasRole('ADMIN')">actions</th>
+                        <th scope="col" sec:authorize="hasRole('ADMIN')">actions</th>
                     </tr>
                 </thead>
                 <tbody th:each="news : ${news}">
@@ -35,7 +35,7 @@
                         <td th:text="${news.title}"></td>
                         <td th:text="${news.postDate}"></td>
                         <td th:text="${news.Journalist.name}"></td>
-                        <td sec:Journalistize="hasRole('ADMIN')">
+                        <td sec:authorize="hasRole('ADMIN')">
                             <a th:href="@{/news/modify/__${news.id}__}">Edit</a>
                             <a th:href="@{/news/delete(id=${news.id})}">Delete</a>
                         </td>

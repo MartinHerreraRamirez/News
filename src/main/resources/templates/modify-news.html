@@ -11,29 +11,27 @@
 
     <main class="content">
 
-        <form class="form" th:action="@{/news/modify/__${news.id}__}" method="post">
+        <form class="form-register" th:action="@{/news/modify/__${news.id}__}" method="post">            
 
-            <div class="container">
+            <input hidden th:value="${id}" name="id">
+            
+            <label class="fw-bold" for="title">Title</label>
+            <input class="mb-1" type="text" name="title" id="title" th:value="${news.title}">
+            
+            <label class="fw-bold" for="body">Body</label>
+            <textarea class="mb-1 w-100 h-75" rows="1" type="text" name="body" id="body" th:utext="${news.body}" ></textarea>
 
-                <input hidden th:value="${id}" name="id">
-                
-                <label class="fw-bold" for="title">Title</label>
-                <input class="mb-2" type="text" name="title" id="title" th:value="${news.title}">
-                
-                <label class="fw-bold" for="body">Body</label>
-                <input class="mb-2" type="text" name="body" id="body" th:value="${news.body}">
-                
-                <select class="mb-2 w-100" name="idJournalist">
-                    <option>Select Journalist</option>
-                    <option 
-                    th:each="Journalist : ${Journalists}"
-                    th:value="${Journalist.id}"
-                    th:text="${Journalist.name}"
-                    />
-                </select>
-                
-                <input class="button" type="submit" value="Modify">
-            </div>
+            <label class="fw-bold" for="journalist">Select Journalist</label>
+            <select class="mb-2 w-50 text-center ms-auto me-auto" name="idJournalist" id="journalist">
+                <option>Select Journalist</option>
+                <option 
+                th:each="journalist : ${Journalists}"
+                th:value="${journalist.id}"
+                th:text="${journalist.name}"
+                />
+            </select>
+            
+            <input class="button me-1" type="submit" value="Modify">            
 
         </form>
 

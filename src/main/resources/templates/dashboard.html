@@ -19,11 +19,10 @@
             <p class="text-end mx-3 mb-0"><a class="button p-2" th:href="@{/news/register}">Create news</a></p>
     
             <table class="table container mb-5 overflow-y-auto">
-                <thead class="table-info">
+                <thead class="table-info ">
                     <tr>
                         <th scope="col">Title</th>
                         <th scope="col">Body</th>
-                        <th scope="col">Date</th>
                         <th scope="col">Journalist</th>                        
                     </tr>
                 </thead>
@@ -31,7 +30,6 @@
                     <tr>                        
                         <th scope="row" th:text="${news.title}"></th>
                         <td th:text="${news.body}"></td>
-                        <td th:text="${news.postDate}"></td>
                         <td th:text="${news.Journalist.name}"></td>
                     </tr>
                 </tbody>
@@ -43,19 +41,21 @@
 
             <h2 class="fw-bold text-center my-4">List of Journalists</h2>
 
-            <table class="table container mb-5 overflow-y-auto">
+            <table class="table container mb-5 overflow-y-auto text-center">
                 <thead class="table-info">
                     <tr>
                         <th scope="col">Name</th>
                         <th scope="col">Last Name</th>
+                        <th scope="col">High Date</th>
                         <th scope="col">State</th>                                               
                     </tr>
                 </thead>
-                <tbody th:each="Journalist : ${Journalists}">
+                <tbody th:each="journalist : ${Journalists}">
                     <tr>                        
-                        <th scope="row" th:text="${Journalist.name}"></th>
-                        <td th:text="${Journalist.lastname}"></td>
-                        <td th:text="${Journalist.isActive}"></td>
+                        <th scope="row" th:text="${journalist.name}"></th>
+                        <td th:text="${journalist.lastname}"></td>
+                        <td th:text="${journalist.highDate}"></td>
+                        <td class="text-capitalize" th:text="${journalist.isActive}"></td>
                     </tr>
                 </tbody>
             </table>
