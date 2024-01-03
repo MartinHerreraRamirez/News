@@ -29,8 +29,8 @@ public class AdminController {
         List<News> news = newsService.findAllNews();
         model.addAttribute("news", news);
 
-        List<Journalist> Journalists = JournalistService.findAllJournalists();
-        model.addAttribute("Journalists",Journalists);
+        List<Journalist> journalists = JournalistService.findAllJournalists();
+        model.addAttribute("journalists",journalists);
 
         return "dashboard";
     }    

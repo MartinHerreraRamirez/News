@@ -4,7 +4,7 @@
     xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
     lang="en"
 >
-    <head th:replace="/fragments/head :: head"></head>
+<head th:replace="/fragments/head :: head"></head>
 
 <body>
     
@@ -12,7 +12,7 @@
 
     <main class="content">
 
-        <section>
+        <section sec:authorize="hasRole('ADMIN')">
             
             <h2 class="fw-bold text-center my-4 text-capitalize"> summary list news</h2>
     
@@ -35,7 +35,7 @@
 
         </section>
 
-        <section class="h-50">
+        <section sec:authorize="hasRole('ADMIN')">
 
             <h2 class="fw-bold text-center my-4 text-capitalize">summary list journalists</h2>
 
@@ -48,7 +48,7 @@
                         <th scope="col">state</th>                                               
                     </tr>
                 </thead>
-                <tbody th:each="journalist : ${Journalists}">
+                <tbody th:each="journalist : ${journalists}">
                     <tr>                        
                         <th scope="row" th:text="${journalist.name}"></th>
                         <td th:text="${journalist.lastname}"></td>
@@ -58,7 +58,11 @@
                 </tbody>
             </table>
 
-        </section>      
+        </section>   
+        
+        <section sec:authorize="hasRole('JOURNALIST')">
+            <h1>HELLO WORLD</h1>
+        </section>
 
     </main>
     
