@@ -34,6 +34,11 @@
             </ul>
           </li>
 
+          
+          <li th:if="${session.usersession == null or session.usersession.getRole().toString() eq 'JOURNALIST'}" class="nav-item dropdown mt-2">
+            <a class="link" th:href="@{/}">Home</a>
+          </li>
+
           <li th:if="${session.usersession != null}" class="nav-item dropdown link py-0">
             <a class="nav-link dropdown-toggle active" 
                role="button" 
@@ -46,15 +51,10 @@
             </a>
             <ul class="dropdown-menu">
               <li th:if="${session.usersession ne null and session.usersession.getRole().toString() ne 'USER'}"><a class="dropdown-item link" th:href="@{/admin/dashboard}">Dashboard</a></li>
-              <li th:if="${session.usersession.getRole().toString() eq 'JOURNALIST'}"><a class="dropdown-item link" th:href="@{/}">Home</a></li>
               <li><a class="dropdown-item link" th:href="@{/logout}">Logout</a></li>
             </ul>
           </li>
-
-          <li th:if="${session.usersession == null}">
-            <a class="link" th:href="@{/}">Home</a>
-          </li>
-
+          
           <li th:if="${session.usersession == null}" >
             <a class="link" th:href="@{/user/register}">Register</a>
           </li>

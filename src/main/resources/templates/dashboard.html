@@ -14,7 +14,7 @@
 
         <section sec:authorize="hasRole('ADMIN')">
             
-            <h2 class="fw-bold text-center my-4 text-capitalize"> summary list news</h2>
+            <h1 class="fw-bold text-center my-4 text-capitalize">list news</h1>
     
             <table class="table container mb-5 overflow-y-auto">
                 <thead class="table-info text-capitalize">
@@ -37,7 +37,7 @@
 
         <section sec:authorize="hasRole('ADMIN')">
 
-            <h2 class="fw-bold text-center my-4 text-capitalize">summary list journalists</h2>
+            <h1 class="fw-bold text-center my-4 text-capitalize">list journalists</h1>
 
             <table class="table container mb-5 overflow-y-auto text-center">
                 <thead class="table-info text-capitalize">
@@ -61,7 +61,27 @@
         </section>   
         
         <section sec:authorize="hasRole('JOURNALIST')">
-            <h1>HELLO WORLD</h1>
+
+            <h1 class="text-center my-4 text-capitalize fw-bold">my news</h1>
+
+            <p class="text-end text-capitalize"><a class="button p-2 me-4" th:href="@{/news/register}">create news</a></p>
+
+            <div class="container">
+                <div class="row">
+                    <div th:each="news : ${journalistOn}" class="col-md-4 pb-2">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title" th:text="${news.title}"></h5>
+                                <p class="card-date" th:text="${news.postDate}"></p>
+                                <img th:src="@{/image/news/__${news.id}__}" class="card-img" alt="News">
+                                <div class="d-flex justify-content-center">
+                                    <a th:if="${session.usersession != null}" th:href="@{/news/see/__${news.id}__}" class="btn btn-primary">See More</a>
+                                </div>
+                            </div>
+                          </div>
+                    </div>
+                </div>
+            </div>
         </section>
 
     </main>

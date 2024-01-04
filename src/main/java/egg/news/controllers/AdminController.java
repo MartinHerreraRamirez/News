@@ -2,6 +2,8 @@ package egg.news.controllers;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -21,16 +23,19 @@ public class AdminController {
     private NewsService newsService;
 
     @Autowired
-    private JournalistService JournalistService;
+    private JournalistService journalistService;
 
     @GetMapping("/dashboard")
-    public String dashboard(ModelMap model){
+    public String dashboard(ModelMap model, HttpSession session){
 
         List<News> news = newsService.findAllNews();
         model.addAttribute("news", news);
 
-        List<Journalist> journalists = JournalistService.findAllJournalists();
-        model.addAttribute("journalists",journalists);
+        List<Journalist> journalists = journalistService.findAllJournalists();
+        model.addAttribute("journalists", journalists);
+
+        Journalist journalistOn = journalistService.getJournalistById(session.getId().toString());
+        model.addAttribute("journalistOn",journalistOn.getMyNews());
 
         return "dashboard";
     }    

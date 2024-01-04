@@ -30,8 +30,7 @@ public class NewsController {
     @GetMapping("/register")
     public String registerNews(ModelMap model){
 
-        List<Journalist> journalists = JournalistService.findAllJournalists();
-        
+        List<Journalist> journalists = JournalistService.findAllJournalists();        
         model.addAttribute("journalists", journalists);
 
         return "news-register";

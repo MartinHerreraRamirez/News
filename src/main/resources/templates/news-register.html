@@ -28,22 +28,39 @@
                 <input class="mb-2" type="text" name="title" id="title">
             
                 <label class="fw-bold" for="body">Body</label>
-                <textarea class="mb-2 w-100 h-25" name="body" id="body" onfocus="this.setSelectionRange(0, 0)" onclick="this.setSelectionRange(0, 0)">
-                </textarea>       
+                <textarea 
+                    class="mb-2 w-100 h-25" 
+                    name="body" 
+                    id="body" 
+                    onfocus="this.setSelectionRange(0, 0)" 
+                    onclick="this.setSelectionRange(0, 0)"
+                ></textarea>       
                 
                 <div class="d-flex justify-content-center ">
                     <label class="w-50 fw-bold border border-black mb-3 text-center" for="file">Upload File</label>
                     <input hidden type="file" name="file" id="file">
                 </div>
 
-                <select class="mb-3 w-100 ms-1" name="idJournalist">
-                    <option>Select Journalist</option>
-                    <option 
-                    th:each="journalist : ${journalists}"
-                    th:value="${journalist.id}"
-                    th:text="${journalist.name}"
-                    />
-                </select>
+                <div th:if="${session.usersession.getRole().toString() eq 'ADMIN'}">
+                    <label class="text-capitalize fw-bold" for="journalists">select journalist</label>
+                    <select class="mb-3 w-100 ms-1" id="journalists" name="idJournalist">
+                        <option 
+                        th:each="journalist : ${journalists}"
+                        th:value="${journalist.id}"
+                        th:text="${journalist.name}"
+                        />
+                    </select>
+                </div>
+
+                <div th:if="${session.usersession.getRole().toString() ne 'ADMIN'}">
+                    <label class="text-capitalize fw-bold" for="journalists">select journalist</label>
+                    <select class="mb-3 w-100 ms-1" id="journalists" name="idJournalist">
+                        <option                        
+                        th:value="${session.usersession.getId}"
+                        th:text="${session.usersession.getName}"
+                        />
+                    </select>
+                </div>
                 
                 <input class="button" type="submit" value="Register">
             </div>
