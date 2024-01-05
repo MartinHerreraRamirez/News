@@ -32,10 +32,7 @@ public class AdminController {
         model.addAttribute("news", news);
 
         List<Journalist> journalists = journalistService.findAllJournalists();
-        model.addAttribute("journalists", journalists);
-
-        Journalist journalistOn = journalistService.getJournalistById(session.getId().toString());
-        model.addAttribute("journalistOn",journalistOn.getMyNews());
+        model.addAttribute("journalists", journalists);     
 
         return "dashboard";
     }    

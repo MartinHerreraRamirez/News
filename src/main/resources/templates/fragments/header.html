@@ -55,11 +55,11 @@
             </ul>
           </li>
           
-          <li th:if="${session.usersession == null}" >
+          <li th:if="${session.usersession == null}" class="nav-item dropdown mt-2">
             <a class="link" th:href="@{/user/register}">Register</a>
           </li>
           
-          <li th:if="${session.usersession == null}" >
+          <li th:if="${session.usersession == null}" class="nav-item dropdown mt-2">
             <a class="link" th:href="@{/login}">Login</a>
           </li>
 
