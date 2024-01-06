@@ -22,7 +22,7 @@ import egg.news.services.NewsService;
 public class NewsController {
 
     @Autowired
-    private JournalistService JournalistService;
+    private JournalistService journalistService;
 
     @Autowired
     private NewsService newsService;
@@ -30,7 +30,7 @@ public class NewsController {
     @GetMapping("/register")
     public String registerNews(ModelMap model){
 
-        List<Journalist> journalists = JournalistService.findAllJournalists();        
+        List<Journalist> journalists = journalistService.findAllJournalists();        
         model.addAttribute("journalists", journalists);
 
         return "news-register";
@@ -51,8 +51,8 @@ public class NewsController {
             
         } catch (Exception e) {
 
-            List<Journalist> Journalists = JournalistService.findAllJournalists();
-            model.addAttribute("Journalists", Journalists);
+            List<Journalist> journalists = journalistService.findAllJournalists();
+            model.addAttribute("journalists", journalists);
             model.put("error", e.getMessage());
 
             return "news-register";    
@@ -81,10 +81,10 @@ public class NewsController {
     public String modifyNew(@PathVariable String id, ModelMap model){
 
         News news = newsService.findNewsById(id);
-        List<Journalist> JournalistList = JournalistService.findAllJournalists();
+        List<Journalist> journalistList = journalistService.findAllJournalists();
         
         model.put("news", news);
-        model.addAttribute("Journalists",JournalistList);
+        model.addAttribute("journalists", journalistList);
 
         return "modify-news";
     }

@@ -24,7 +24,7 @@ public class NewsService {
     private INewsRepository newsRepository;
 
     @Autowired
-    private IJournalistRepository JournalistRepository;
+    private IJournalistRepository journalistRepository;
 
     @Autowired
     private ImageService imageService;
@@ -35,23 +35,31 @@ public class NewsService {
         validate(title, body, idJournalist);
 
         News news = new News();
-        Journalist Journalist = JournalistRepository.findById(idJournalist).get();
+        Journalist journalist = journalistRepository.findById(idJournalist).orElseThrow(() -> new MyExceptions("Journalist not found"));
 
         news.setTitle(title);
         news.setBody(body);
         news.setPostDate(new Date());
-        news.setIsPost(true);                
-        news.setJournalist(Journalist);
+        news.setIsPost(true);
+        news.setJournalist(journalist);
 
         Image image = imageService.saveImage(file);
         news.setImage(image);
 
-        newsRepository.save(news);
+        journalist.getMyNews().add(news);
+        journalistRepository.save(journalist);
     }
 
     public List<News> findAllNews(){
         
         List<News> news = newsRepository.findAll();
+
+        return news;
+    }
+
+    public List<News> findNewsByJournalistId(String id){
+
+        List<News> news = newsRepository.findNewsByJournalistId(id);
 
         return news;
     }
@@ -62,7 +70,7 @@ public class NewsService {
         validate(title, body, idJournalist);
 
         Optional<News> responseNews = newsRepository.findById(id);
-        Optional<Journalist> responseJournalist = JournalistRepository.findById(idJournalist);
+        Optional<Journalist> responseJournalist = journalistRepository.findById(idJournalist);
 
         Journalist journalist = new Journalist();
 
@@ -90,11 +98,10 @@ public class NewsService {
 
     public News findNewsById(String id){
 
-        Optional<News> newsResponse = newsRepository.findById(id);       
-        
-        News news = new News();
+        Optional<News> newsResponse = newsRepository.findById(id);             
         
         if(newsResponse.isPresent()){
+            News news = new News();
             return news = newsResponse.get();
         }
 

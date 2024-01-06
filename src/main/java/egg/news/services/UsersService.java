@@ -144,10 +144,9 @@ public class UsersService implements UserDetailsService{
     public Users findUserById(String id){
 
         Optional<Users> responseUser = usersRepository.findById(id);
-
-        Users users = null;
-
+        
         if(responseUser.isPresent()){
+            Users users = null;
             return users = responseUser.get();
         }
 

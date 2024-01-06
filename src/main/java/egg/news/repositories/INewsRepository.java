@@ -13,8 +13,11 @@ import egg.news.models.News;
 public interface INewsRepository extends JpaRepository<News, String>{
 
     @Query("SELECT n FROM News n WHERE n.title = :title")
-    public News findByTitle(@Param("title") String title);
+    public News findNewsByTitle(@Param("title") String title);
 
-    @Query("SELECT n FROM News n WHERE n.Journalist.name = :name")
-    public List<News> findByJournalist(@Param("name") String name);    
+    @Query("SELECT n FROM News n WHERE n.journalist.name = :name")
+    public List<News> findNewsByJournalist(@Param("name") String name); 
+    
+    @Query("SELECT n FROM News n WHERE n.journalist.id = :id")
+    public List<News> findNewsByJournalistId(@Param("id") String id);
 } 

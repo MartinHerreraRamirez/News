@@ -23,16 +23,21 @@ public class AdminController {
     private NewsService newsService;
 
     @Autowired
-    private JournalistService journalistService;
+    private JournalistService journalistService;    
 
     @GetMapping("/dashboard")
     public String dashboard(ModelMap model, HttpSession session){
+
+        Journalist journalistOn = (Journalist) session.getAttribute("usersession");
 
         List<News> news = newsService.findAllNews();
         model.addAttribute("news", news);
 
         List<Journalist> journalists = journalistService.findAllJournalists();
-        model.addAttribute("journalists", journalists);     
+        model.addAttribute("journalists", journalists); 
+        
+        List<News> newsByJournalistId = journalistService.findJournalistWithNews(journalistOn.getId()).getMyNews();
+        model.addAttribute("journalistOn", newsByJournalistId); 
 
         return "dashboard";
     }    

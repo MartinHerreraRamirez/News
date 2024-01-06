@@ -25,7 +25,7 @@
             <select class="mb-2 w-50 text-center ms-auto me-auto" name="idJournalist" id="journalist">
                 <option>Select Journalist</option>
                 <option 
-                th:each="journalist : ${Journalists}"
+                th:each="journalist : ${journalists}"
                 th:value="${journalist.id}"
                 th:text="${journalist.name}"
                 />

@@ -5,6 +5,7 @@ import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
@@ -33,7 +34,8 @@ public class News {
     private Boolean isPost;
 
     @ManyToOne
-    private Journalist Journalist;    
+    @JoinColumn(name = "journalist_id", referencedColumnName = "id")
+    private Journalist journalist;    
 
     @OneToOne
     private Image image;

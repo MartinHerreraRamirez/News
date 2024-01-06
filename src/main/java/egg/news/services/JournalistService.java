@@ -70,6 +70,10 @@ public class JournalistService {
         return journalistRepository.getReferenceById(id);
     }
 
+    public Journalist findJournalistWithNews(String id){
+        return journalistRepository.findJournalistWithNews(id);
+    }
+
     private void validate(
     String name, 
     String lastname, 

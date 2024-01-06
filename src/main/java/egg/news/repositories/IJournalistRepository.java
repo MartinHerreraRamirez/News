@@ -15,6 +15,10 @@ public interface IJournalistRepository extends JpaRepository<Journalist, String>
 
     @Query("SELECT u FROM Users u WHERE u.role = :role")
     public List<Journalist> findUsersByRol(@Param("role") Role role);
+
+    @Query("SELECT j FROM Journalist j JOIN FETCH j.myNews WHERE j.id = :id")
+    public Journalist findJournalistWithNews(@Param("id") String id);
+
     
     
 } 
